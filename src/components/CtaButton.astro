@@ -1,0 +1,92 @@
+---
+const { text, href = "#", id, variant = "main" } = Astro.props;
+---
+
+<div class="cta-wrap">
+  <a href={href} class:list={["cta-btn", variant === "fv" && "cta-btn--fv"]} id={id} aria-label={text}>
+    <svg class="cta-btn__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="12" cy="9" r="3" stroke="currentColor" stroke-width="1.6"/>
+    </svg>
+    <span>{text}</span>
+    <svg class="cta-btn__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+  <p class="cta-wrap__sub">ご相談・お申込みは公式LINEから。塾長が直接お返事します。</p>
+</div>
+
+<style>
+  .cta-wrap {
+    margin: 64px auto;
+    max-width: 480px;
+    width: 100%;
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    height: 60px;
+    padding: 0 24px;
+    background: var(--purple);
+    color: var(--paper);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(76, 29, 149, 0.32);
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    line-height: 1;
+  }
+
+  .cta-btn:hover,
+  .cta-btn:focus-visible {
+    background: var(--purple-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(76, 29, 149, 0.42);
+    outline: none;
+  }
+
+  .cta-btn:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 3px;
+  }
+
+  /* FV直下CTA専用：FV紫（より明るい紫で第一印象のアテンション最大化） */
+  .cta-btn--fv {
+    background: var(--fv-purple);
+    box-shadow: 0 8px 28px rgba(124, 58, 237, 0.4);
+  }
+
+  .cta-btn--fv:hover,
+  .cta-btn--fv:focus-visible {
+    background: var(--fv-purple-deep);
+    box-shadow: 0 14px 36px rgba(124, 58, 237, 0.5);
+  }
+
+  .cta-btn__icon {
+    flex-shrink: 0;
+  }
+
+  .cta-btn__chev {
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  .cta-wrap__sub {
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .cta-wrap { margin: 48px auto; padding: 0 20px; }
+    .cta-btn { font-size: 15px; height: 56px; }
+  }
+</style>

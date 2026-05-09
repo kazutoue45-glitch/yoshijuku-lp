@@ -1,0 +1,1280 @@
+---
+import Base from "../layouts/Base.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import TeacherCard from "../components/TeacherCard.astro";
+import PriceTable from "../components/PriceTable.astro";
+import QaItem from "../components/QaItem.astro";
+import CtaButton from "../components/CtaButton.astro";
+
+const base = import.meta.env.BASE_URL;
+
+// 3サービス（クイックナビ・比較セクション両方で利用）
+const services = [
+  {
+    index: "01",
+    title: "義塾（リアル校舎）",
+    tagline: "成田町の校舎で、講師陣と一緒に学ぶ",
+    target: "小3〜高3",
+    priceRange: "14,300〜44,000円",
+    forWhom: [
+      "通塾できる距離に住んでいる",
+      "同年代と切磋琢磨させたい",
+      "クラスと個別を使い分けたい",
+    ],
+    anchorId: "service-real",
+    accentColor: "#4C1D95",
+    iconName: "building",
+  },
+  {
+    index: "02",
+    title: "義塾オンライン",
+    tagline: "完全個別1対1、選べる4つの専門講座をご自宅から",
+    target: "小4〜社会人",
+    priceRange: "22,000円〜",
+    forWhom: [
+      "自宅で集中して学ばせたい",
+      "英検・TOEIC・探究・AIなど専門領域を伸ばしたい",
+      "移動時間をゼロにしたい",
+    ],
+    anchorId: "service-online",
+    accentColor: "#2E8B57",
+    iconName: "monitor",
+  },
+  {
+    index: "03",
+    title: "義塾の家庭教師",
+    tagline: "講師がご自宅へ訪問・塾長と直接つながる",
+    target: "中1〜高2",
+    priceRange: "26,400円〜",
+    forWhom: [
+      "マンツーマンで進路相談まで含めたい",
+      "兄弟姉妹・お友達とペア受講したい",
+      "塾長と直接つながる安心がほしい",
+    ],
+    anchorId: "service-tutor",
+    accentColor: "#2563B8",
+    iconName: "bag",
+  },
+];
+
+// 共感ブロック チェックリスト
+const empathyItems = [
+  "お子様のテストの点数が伸び悩んでいる",
+  "受験までに間に合うか不安",
+  "子どもに合う指導形態（個別／クラス／オンライン／家庭教師）が分からない",
+  "通塾の送迎が大変",
+  "自宅学習だと集中できない",
+  "進路や勉強法を相談できる相手が欲しい",
+];
+
+// FAQ
+const faqs = [
+  {
+    q: "初月授業料1ヶ月無料の対象や条件を教えてください。",
+    a: '新規入塾生限定のキャンペーンです。対象期間・対象サービス・対象学年・適用条件の詳細は、公式LINEからお問い合わせください。<!-- 要確認: キャンペーン詳細条件 -->',
+  },
+  {
+    q: "無料体験はできますか？",
+    a: "はい、公式LINE登録後、塾長との個別相談を経て無料体験授業をご案内します（リアル校舎・オンライン・家庭教師いずれも対応）。",
+  },
+  {
+    q: "途中で退塾する場合の手続きは？",
+    a: "月末締めでのご退塾手続きが基本です。違約金等は発生しません。<!-- 要確認: 退塾手続きの正確なルール -->",
+  },
+  {
+    q: "部活や習い事と両立できますか？",
+    a: "はい、リアル校舎は17:00〜21:40の中から時間帯を選択でき、家庭教師は曜日・時間をご家庭の都合に合わせて調整します。オンラインなら移動時間ゼロで両立しやすくなります。",
+  },
+  {
+    q: "途中で指導形態（リアル↔オンライン↔家庭教師）を変更できますか？",
+    a: "状況に応じて柔軟にご相談いただけます。塾長との個別面談で最適な形をご提案します。<!-- 要確認: 形態変更時の事務手続き -->",
+  },
+  {
+    q: "受験対策はどの学年から始めればよいですか？",
+    a: "中学受験は小3〜小5、高校受験は中1〜中2、大学受験は高1からのスタートが理想です。学年や状況に応じて、塾長が最適なプランをご提案します。",
+  },
+];
+---
+
+<Base>
+  {/* ============ §1 ファーストビュー（上下分割：画像／テキストエリア） ============ */}
+  <section class="hero">
+    {/* 上部全幅の紫帯：ロゴ＋住所サブ */}
+    <div class="hero__topband">
+      <div class="hero__topband-inner">
+        <span class="hero__topband-logo">
+          <ruby>義塾<rt>よしじゅく</rt></ruby>
+        </span>
+        <span class="hero__topband-sub">
+          寝屋川市成田町の学習塾<br />
+          <small>小学生・中学生・高校生 対応</small>
+        </span>
+      </div>
+    </div>
+
+    {/* FV画像エリア（授業風景） */}
+    <div class="hero__photo">
+      <picture>
+        <source srcset={`${base}images/hero-photo.jpg`} type="image/jpeg" />
+        <img src={`${base}images/hero.svg`} alt="義塾の授業風景" loading="eager" />
+      </picture>
+    </div>
+
+    {/* 下段：白背景のテキストエリア */}
+    <div class="hero__panel">
+      <div class="hero__panel-grid">
+        {/* 左：メインキャッチ＋サブ */}
+        <div class="hero__catch">
+          <h1 class="hero__title">
+            <span class="hero__title-row">今よりもう一段上の</span>
+            <span class="hero__title-em">賢さを。</span>
+          </h1>
+          <p class="hero__sub">
+            『行きたい高校・大学に合格させたい』<br />
+            その想いに、8人の講師陣が本気で応えます。
+          </p>
+        </div>
+
+        {/* 右：キャンペーンバッジ */}
+        <div class="hero__badge" aria-label="新規入塾生限定 初月授業料1ヶ月無料">
+          <span class="hero__badge-ribbon">新規入塾生限定</span>
+          <span class="hero__badge-body">
+            <span class="hero__badge-label">初月授業料</span>
+            <span class="hero__badge-main">1ヶ月無料</span>
+          </span>
+          <span class="hero__badge-note">※適用条件あり</span>
+        </div>
+      </div>
+
+      {/* 3つの実績ポイントチップ */}
+      <ul class="hero__chips" role="list">
+        <li>
+          <span class="hero__chip-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M3 9l9-5 9 5-9 5-9-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M7 11v5c0 1 2.5 2 5 2s5-1 5-2v-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M21 9v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="hero__chip-text">中学受験・高校受験・<br />大学受験すべて対応</span>
+        </li>
+        <li>
+          <span class="hero__chip-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M21 12c0 4.4-4 8-9 8-1.5 0-3-.3-4.3-.9L3 20l1.4-3.6C3.5 15.2 3 13.6 3 12c0-4.4 4-8 9-8s9 3.6 9 8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="hero__chip-text">公式LINEで<br />塾長と直接相談できる</span>
+        </li>
+        <li>
+          <span class="hero__chip-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M12 22s8-7 8-13a8 8 0 1 0-16 0c0 6 8 13 8 13Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <circle cx="12" cy="9" r="2.6" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+          </span>
+          <span class="hero__chip-text">寝屋川市成田町・<br />成田山不動尊近く</span>
+        </li>
+      </ul>
+    </div>
+
+    {/* 下端のスクロール誘導 */}
+    <p class="hero__scrollguide">
+      <span>スクロールして詳細を見る</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </p>
+  </section>
+
+  {/* CTA ① FV直下（FV紫専用） */}
+  <CtaButton text="今だけ初月無料で申し込む" href="#" id="cta-1" variant="fv" />
+
+  {/* ============ §2 サービスクイックナビ ============ */}
+  <section class="section section--white quicknav">
+    <div class="container">
+      <span class="quicknav__eyebrow">学び方を選ぶ</span>
+      <p class="quicknav__lead">
+        学び方は3つ。お子様の状況に合わせて、塾長と一緒に最適な学び方を見つけられます。
+      </p>
+      <div class="quicknav__grid" id="services">
+        {services.map((s) => <ServiceCard {...s} />)}
+      </div>
+    </div>
+  </section>
+
+  {/* ============ §3 共感ブロック ============ */}
+  <section class="section section--pale-gray empathy">
+    <div class="container">
+      <SectionHeader
+        eyebrow="共感"
+        title="「うちの子、本当に大丈夫かな。」"
+        lead="夜にふと、そう思ったことはありませんか。<br />ひとつでも当てはまるなら、義塾にご相談ください。"
+        align="center"
+      />
+      <ul class="empathy__list">
+        {empathyItems.map((item) => (
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {/* CTA ② 共感末尾 */}
+  <CtaButton text="公式LINEで、塾長に相談する" href="#" id="cta-2" />
+
+  {/* ============ §4 3サービス比較 ============ */}
+  <section class="section section--white services-detail">
+    <div class="container">
+      <SectionHeader
+        eyebrow="3つの学び方"
+        title="お子様に合う学び方が、必ずあります。"
+        lead="成績が伸びないのは、お子様の能力ではなく、<strong>学び方が合っていないだけ</strong>かもしれません。義塾は、リアル校舎・オンライン・家庭教師の3サービスを併走しています。通塾できる距離か、自宅で集中したいか、マンツーマンで進路相談まで含めたいか——お子様の状況に合わせて選べる、それが義塾の強みです。"
+      />
+
+      {/* ① リアル校舎 */}
+      <article class="svc-detail section-anchor" id="service-real" style="--accent:#4C1D95;">
+        <header class="svc-detail__head">
+          <span class="svc-detail__num">01</span>
+          <div>
+            <h3>義塾（リアル校舎）</h3>
+            <p class="svc-detail__lead">指導経験が豊富で安心できる8人の講師陣と、集中できる環境</p>
+          </div>
+        </header>
+        <div class="svc-detail__body">
+          <div class="svc-detail__photo">
+            <img src={`${base}images/service-real.svg`} alt="リアル校舎の授業風景" loading="lazy" />
+          </div>
+          <dl class="svc-detail__data">
+            <div><dt>対象</dt><dd>小3〜高3</dd></div>
+            <div><dt>指導形態</dt><dd>個別指導（月水木金 17:00〜21:40・45分選択制）／クラス授業（中1・中3・高1・高3）</dd></div>
+            <div><dt>強み</dt><dd>指導経験が豊富で安心できる講師陣／個別とクラスを必要に応じて使い分けられる選択肢の幅</dd></div>
+            <div><dt>おすすめ</dt><dd>新学期はクラス授業の受講が始めやすい時期です</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      {/* ② オンライン */}
+      <article class="svc-detail section-anchor" id="service-online" style="--accent:#2E8B57;">
+        <header class="svc-detail__head">
+          <span class="svc-detail__num">02</span>
+          <div>
+            <h3>義塾オンライン（オンラインプライベートレッスン）</h3>
+            <p class="svc-detail__lead">完全個別指導1対1、選べる4つの専門講座をご自宅から</p>
+          </div>
+        </header>
+        <div class="svc-detail__body">
+          <div class="svc-detail__photo">
+            <img src={`${base}images/service-online.svg`} alt="オンライン受講イメージ" loading="lazy" />
+          </div>
+          <dl class="svc-detail__data">
+            <div><dt>対象</dt><dd>小4〜社会人（講座により異なる）</dd></div>
+            <div><dt>指導形態</dt><dd>完全個別指導 1対1／オンラインプライベートレッスン</dd></div>
+            <div>
+              <dt>4つの講座</dt>
+              <dd>
+                <ul class="svc-detail__sublist">
+                  <li>探究プレゼン講座（小4〜高3）</li>
+                  <li>実践プレゼン講座（大学生・社会人・指導者）</li>
+                  <li>AI音楽制作講座（中1〜社会人）</li>
+                  <li>英検・TOEIC対策講座（中1〜社会人）</li>
+                </ul>
+              </dd>
+            </div>
+            <div><dt>強み</dt><dd>完全マンツーマンで密に伴走／TOEIC990点23回連続満点・英検1級保持のスペシャリスト講師が担当（英検・TOEIC講座）／受験以外の専門領域もカバー</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      {/* ③ 家庭教師 */}
+      <article class="svc-detail section-anchor" id="service-tutor" style="--accent:#2563B8;">
+        <header class="svc-detail__head">
+          <span class="svc-detail__num">03</span>
+          <div>
+            <h3>義塾の家庭教師</h3>
+            <p class="svc-detail__lead">講師がご自宅へ。授業も進路相談も、塾長と直接つながる安心を。</p>
+          </div>
+        </header>
+        <div class="svc-detail__body">
+          <div class="svc-detail__photo">
+            <img src={`${base}images/service-tutor.svg`} alt="家庭教師訪問イメージ" loading="lazy" />
+          </div>
+          <dl class="svc-detail__data">
+            <div><dt>対象</dt><dd>中1〜高2（中学受験生・高3は個別相談）</dd></div>
+            <div><dt>指導形態</dt><dd>完全マンツーマン／週1日2時間（月4回・計8時間）</dd></div>
+            <div><dt>強み</dt><dd>第1期生特別価格（2026年入塾生限定）／講師がご自宅まで訪問／公式LINEでいつでも塾長と連絡可能（授業だけでなく進路相談も安心）／兄弟姉妹・お友達とのペア受講でさらにお得</dd></div>
+          </dl>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  {/* CTA ③ 3サービス比較末尾 */}
+  <CtaButton text="自分に合う学び方を、塾長に相談する" href="#" id="cta-3" />
+
+  {/* ============ §5 料金一覧 ============ */}
+  <section class="section section--pale-gray-2 pricing section-anchor" id="pricing">
+    <div class="container">
+      <SectionHeader
+        eyebrow="料金"
+        title="料金は、すべて明朗にお伝えします。"
+        align="center"
+      />
+
+      <PriceTable
+        caption="義塾（リアル校舎）"
+        headers={["学年", "指導方法", "科目・曜日", "時間", "税込月額"]}
+        rows={[
+          ["小3〜高3", "個別指導", "月水木金／5科目", "17:00〜21:40（45分選択制）", "14,300〜25,300円"],
+          ["中1", "クラス授業", "水：数学／金：英国", "19:05〜20:45", "19,800円"],
+          ["中3", "クラス授業", "木：数数社／金：英英理", "19:05〜21:40", "33,000円"],
+          ["高1", "クラス授業", "月：英・数", "19:05〜21:40", "15,400円"],
+          ["高3", "クラス授業", "月水木：国公立・難関私大対策", "19:05〜21:40", "44,000円"],
+        ]}
+        note="※ 中2・高2クラス料金、入塾金・教材費・季節講習費は教室までお問い合わせください。<!-- 要確認: 中2・高2料金/入塾金/教材費/季節講習費 -->"
+      />
+
+      <PriceTable
+        caption="義塾の家庭教師"
+        headers={["プラン", "対象", "頻度", "税込月額", "備考"]}
+        rows={[
+          ["通常（1名）", "中1〜高2", "週1日2時間（月4回・計8時間）", "26,400円＋講師交通費", "第1期生特別価格（2026年入塾生限定）"],
+          ["ペア受講", "中1〜高2", "週1日2時間（月4回・計8時間）", "46,200円＋講師交通費（お二人分）", "兄弟姉妹様・お友達とご一緒に"],
+        ]}
+        note="※ 初回のみ：入塾金 11,000円／教材費 2,200円・冊。中学受験生・高校3年生は個別にご相談ください。"
+      />
+
+      <PriceTable
+        caption="義塾オンライン"
+        headers={["プラン", "形態", "1コマ料金", "税込月額", "備考"]}
+        rows={[
+          ["オンラインプライベートレッスン", "完全個別 1対1", "5,500円", "22,000円〜", "月4コマ目安／4講座から選択"],
+        ]}
+        note="※ 選べる4つの講座：探究プレゼン／実践プレゼン／AI音楽制作／英検・TOEIC対策"
+      />
+
+      {/* キャンペーンOffer再強調 */}
+      <div class="campaign">
+        <span class="campaign__icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <path d="M20 12v8H4v-8M22 8H2v4h20V8zM12 8v14M12 8a3 3 0 1 1-3-3 3 3 0 0 1 3 3zM12 8a3 3 0 1 0 3-3 3 3 0 0 0-3 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <div>
+          <p class="campaign__label">新規入塾生限定</p>
+          <p class="campaign__main">初月の授業料 1ヶ月無料</p>
+          <p class="campaign__note">
+            対象期間・対象サービス・適用条件は公式LINEにてご案内します。
+            <!-- 要確認: キャンペーン期間・対象サービス・対象学年・適用条件 -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA ④ キャンペーン再強調直後 */}
+  <CtaButton text="初月無料で、義塾を始める" href="#" id="cta-4" />
+
+  {/* ============ §6 FAQ ============ */}
+  <section class="section section--white faq section-anchor" id="faq">
+    <div class="container container--narrow">
+      <SectionHeader
+        eyebrow="よくあるご質問"
+        title="保護者の方からよくいただくご質問"
+        align="center"
+      />
+      <div class="faq__list">
+        {faqs.map((item) => <QaItem q={item.q} a={item.a} />)}
+      </div>
+      <p class="faq__more">
+        他にもご質問がある方は、公式LINEからお気軽にお問い合わせください。
+      </p>
+    </div>
+  </section>
+
+  {/* ============ §7 講師紹介・思想 ============ */}
+  <section class="section section--white teachers section-anchor" id="teachers">
+    <div class="container">
+      <SectionHeader
+        eyebrow="講師紹介"
+        title="お子様の未来に、本気で寄り添う8人の講師陣。"
+        lead="義塾は、ただ勉強を教える場所ではありません。お子様一人ひとりの個性と目標に向き合い、「行きたい学校に行ける」「学ぶことが好きになる」未来を、ベテランから若手まで、多様な経歴を持つ8名の講師陣と一緒に、本気で支える場所です。<br /><br />ここでは、義塾を率いる<strong class='text-orange'>塾長</strong>と、オンライン講座を担当する<strong class='text-orange'>英語スペシャリスト</strong>の2名をご紹介します。"
+        align="center"
+      />
+      <div class="teachers__grid">
+        <TeacherCard
+          name="小川 大輔"
+          nameEn="OGAWA Daisuke"
+          title="塾長／義塾代表"
+          quote="教育とエンタメを融合し、みんながワクワクするイベントを企画運営します"
+          photoSrc={`${base}images/teacher-ogawa.svg`}
+          bioParagraphs={[
+            "学歴：四條畷高校 → 大阪大学理学部物理学科卒業。",
+            "大手食品メーカーで約5年間勤務後、学習塾講師へ。12年間の講師経験を経て、2020年に新規校舎設立、2022年に新ブランド設立、2024年に日本を教育で元気にすべく小川探究を創設。",
+          ]}
+          achievements={[
+            { label: "小川探究 代表", desc: "探究教育のフロントランナー" },
+            { label: "プレゼン大会主催", desc: "次世代の表現者を育成する舞台を創出" },
+            { label: "「就プレ」講師", desc: "就活生へのプレゼン指導で実績多数" },
+            { label: "教育現場での指導", desc: "私立高校でのプレゼン授業を担当" },
+          ]}
+          message="公式LINEで、塾長の私と直接お話しできます。どんな小さな不安でも、まずはご相談ください。"
+        />
+        <TeacherCard
+          name="國府 泰"
+          nameEn="KOKUFU Yasushi"
+          title="義塾オンライン｜英検・TOEIC対策講座 担当"
+          quote="TOEIC23回連続満点。英語の壁を、論理で確実に超えさせます"
+          photoSrc={`${base}images/teacher-kokufu.svg`}
+          bioParagraphs={[
+            "大手予備校にて講師としての歩みを始める。高校・大学・医学部予備校で20年間指導。現在も赤本の執筆や入試問題作成に携わり続ける、受験英語の第一線を知るスペシャリスト。",
+            "TOEIC23回連続満点・英検1級を保持する圧倒的な英語力を武器に、京大・阪大をはじめとする最難関大学へ数多くの門下生を輩出。現在は義塾にて、少人数制の指導とオンライン講座を展開中。",
+          ]}
+          achievements={[
+            { label: "TOEIC 990点 23回連続取得", desc: "国内屈指の精緻な英語分析力" },
+            { label: "「English Booster」開発者", desc: "論理的再構築による独自メソッド" },
+            { label: "予備校20年・赤本執筆", desc: "京大・阪大など最難関大へ多数輩出" },
+            { label: "英検1級・超精密指導", desc: "高度な英作文・読解指導に定評" },
+          ]}
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* ============ §8 アクセス・お問い合わせ ============ */}
+  <section class="section section--pale-gray access section-anchor" id="access">
+    <div class="container container--narrow">
+      <SectionHeader
+        eyebrow="お問い合わせ"
+        title="まずは、公式LINEで気軽にご相談ください。"
+        lead="<strong class='text-orange'>新規入塾生限定／初月の授業料 1ヶ月無料。</strong><br />体験授業・無料相談・進路相談、すべて公式LINEから受け付けています。塾長が直接お返事します。"
+        align="center"
+      />
+
+      <div class="access__qr">
+        <div class="access__qr-img">
+          <img src={`${base}images/line-qr.svg`} alt="公式LINE 友だち追加QRコード" />
+        </div>
+        <p class="access__qr-note">スマホでこのページをご覧の方は、下のボタンから直接お進みください。</p>
+      </div>
+    </div>
+
+    {/* CTA ⑤ 最終CTA */}
+    <CtaButton text="公式LINEで無料相談する" href="#" id="cta-5" />
+
+    <div class="container container--narrow">
+      <div class="access__info">
+        <h3 class="access__info-title">アクセス・お問い合わせ</h3>
+        <dl class="access__info-list">
+          <div><dt>住所</dt><dd>〒572-0833 大阪府寝屋川市成田町32-24</dd></div>
+          <div><dt>校舎</dt><dd>新築一戸建てを改装した3教室（クラス授業／個別指導／多目的）</dd></div>
+          <div><dt>TEL</dt><dd><a href="tel:0728147633">072-814-7633</a></dd></div>
+          <div><dt>携帯</dt><dd><a href="tel:09085773169">090-8577-3169</a></dd></div>
+          <div><dt>アクセス</dt><dd>成田山不動尊近く<!-- 要確認: 最寄り駅・バス停・駐車場の有無 --></dd></div>
+        </dl>
+      </div>
+
+      <p class="access__legal">
+        ※ キャンペーンの対象期間・対象サービス・対象学年・適用条件の詳細は公式LINEにてご案内いたします。学習塾広告ガイドラインに沿って表記しています。
+        <!-- 要確認: 法務注釈の最終文言（学習塾広告ガイドライン準拠） -->
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* =========================================
+     §1 Hero（上下分割：紫帯／画像／白テキストエリア）
+     ========================================= */
+  .hero {
+    position: relative;
+    background: var(--paper);
+    overflow: hidden;
+  }
+
+  /* ============== 上部紫帯：全幅 ロゴ＋住所 ============== */
+  .hero__topband {
+    background: var(--purple);
+    color: var(--paper);
+    padding: 14px 0;
+  }
+
+  .hero__topband-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero__topband-logo {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.06em;
+    color: var(--paper);
+  }
+
+  /* ふりがな（rt）の見栄え */
+  .hero__topband-logo ruby rt {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.82);
+    margin-bottom: 2px;
+    font-family: var(--font-sans);
+  }
+
+  .hero__topband-sub {
+    font-size: 12px;
+    line-height: 1.55;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 0.02em;
+  }
+
+  .hero__topband-sub small {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.78);
+    letter-spacing: 0.04em;
+  }
+
+  /* ============== FV画像エリア ============== */
+  .hero__photo {
+    position: relative;
+    aspect-ratio: 16 / 11;
+    max-height: 56vh;
+    overflow: hidden;
+    background: var(--purple-deep);
+  }
+
+  .hero__photo picture,
+  .hero__photo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* 画像の下端に薄い紫グラデで馴染ませる */
+  .hero__photo::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.95) 100%);
+    pointer-events: none;
+  }
+
+  /* ============== 下段：白背景パネル ============== */
+  .hero__panel {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 28px 24px 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero__panel-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 28px;
+  }
+
+  /* メインキャッチエリア */
+  .hero__catch {
+    position: relative;
+    padding-left: 16px;
+  }
+
+  /* メインキャッチ左の紫縦罫 */
+  .hero__catch::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 12px;
+    width: 4px;
+    background: var(--purple);
+    border-radius: 2px;
+  }
+
+  .hero__title {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+    color: var(--purple);
+    margin-bottom: 16px;
+  }
+
+  .hero__title-row {
+    display: block;
+    font-size: clamp(20px, 5.5vw, 28px);
+    color: var(--charcoal);
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .hero__title-em {
+    display: inline-block;
+    font-size: clamp(48px, 14vw, 76px);
+    color: var(--purple-deep);
+    line-height: 1.05;
+    letter-spacing: 0.04em;
+  }
+
+  .hero__sub {
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--charcoal-soft);
+    letter-spacing: 0.02em;
+  }
+
+  /* キャンペーンバッジ：右上に独立配置（オレンジリボン+白パネル） */
+  .hero__badge {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    background: var(--paper);
+    border: 1.5px solid var(--orange);
+    color: var(--purple-deep);
+    padding: 14px 16px 10px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(232, 122, 46, 0.18);
+    min-width: 130px;
+    margin-top: 12px;
+  }
+
+  /* バッジ上部のオレンジリボンタブ */
+  .hero__badge-ribbon {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--orange);
+    color: var(--paper);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    box-shadow: 0 3px 8px rgba(232, 122, 46, 0.32);
+  }
+
+  .hero__badge-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-top: 6px;
+    text-align: center;
+  }
+
+  .hero__badge-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--charcoal);
+    letter-spacing: 0.04em;
+  }
+
+  .hero__badge-main {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--orange);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+  }
+
+  .hero__badge-note {
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ============== 3つの実績ポイントチップ ============== */
+  .hero__chips {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .hero__chips li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    background: var(--purple-soft);
+    color: var(--purple-deep);
+    padding: 16px 8px 14px;
+    border-radius: 12px;
+    text-align: center;
+    min-height: 96px;
+  }
+
+  .hero__chip-icon {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper);
+    color: var(--purple);
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(76, 29, 149, 0.18);
+  }
+
+  .hero__chip-text {
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--purple-deep);
+    letter-spacing: 0.02em;
+  }
+
+  /* ============== スクロール誘導 ============== */
+  .hero__scrollguide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 20px 0 28px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .hero__scrollguide svg {
+    animation: scrollguide-bounce 1.6s ease-in-out infinite;
+  }
+
+  @keyframes scrollguide-bounce {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(3px); opacity: 0.55; }
+  }
+
+  /* ============== レスポンシブ ============== */
+
+  /* スマホ狭幅 */
+  @media (max-width: 380px) {
+    .hero__topband-inner {
+      padding: 0 20px;
+    }
+    .hero__topband-logo {
+      font-size: 24px;
+    }
+    .hero__topband-sub {
+      font-size: 11px;
+    }
+    .hero__panel {
+      padding: 24px 20px 20px;
+    }
+    .hero__panel-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .hero__badge {
+      align-self: center;
+      min-width: 0;
+      width: 100%;
+      max-width: 240px;
+      margin-top: 4px;
+    }
+    .hero__chips li {
+      min-height: 88px;
+      padding: 14px 6px 12px;
+    }
+    .hero__chip-text {
+      font-size: 10.5px;
+    }
+  }
+
+  /* PC */
+  @media (min-width: 769px) {
+    .hero__topband {
+      padding: 18px 0;
+    }
+    .hero__topband-logo {
+      font-size: 32px;
+    }
+    .hero__topband-sub {
+      font-size: 13px;
+    }
+    .hero__topband-sub small {
+      font-size: 11px;
+    }
+    .hero__photo {
+      aspect-ratio: 16 / 7;
+      max-height: none;
+    }
+    .hero__panel {
+      padding: 40px 32px 32px;
+    }
+    .hero__panel-grid {
+      gap: 32px;
+      margin-bottom: 36px;
+    }
+    .hero__catch {
+      padding-left: 22px;
+    }
+    .hero__catch::before {
+      width: 5px;
+    }
+    .hero__title-row {
+      font-size: 30px;
+    }
+    .hero__title-em {
+      font-size: 80px;
+    }
+    .hero__sub {
+      font-size: 15px;
+    }
+    .hero__badge {
+      min-width: 160px;
+      padding: 16px 20px 12px;
+    }
+    .hero__badge-main {
+      font-size: 26px;
+    }
+    .hero__chips {
+      gap: 16px;
+    }
+    .hero__chips li {
+      padding: 20px 12px 16px;
+      min-height: 110px;
+    }
+    .hero__chip-icon {
+      width: 44px;
+      height: 44px;
+    }
+    .hero__chip-text {
+      font-size: 12.5px;
+    }
+  }
+
+  /* =========================================
+     §2 サービスクイックナビ
+     ========================================= */
+  .quicknav {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .quicknav__eyebrow {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .quicknav__lead {
+    text-align: center;
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin-bottom: 40px;
+    line-height: 1.85;
+  }
+
+  .quicknav__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    scroll-margin-top: 80px;
+  }
+
+  @media (max-width: 900px) {
+    .quicknav__grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
+
+  /* =========================================
+     §3 共感
+     ========================================= */
+  .empathy__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .empathy__list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--paper);
+    padding: 18px 22px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--charcoal-soft);
+  }
+
+  .empathy__list svg {
+    color: var(--orange);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .empathy__list { grid-template-columns: 1fr; gap: 12px; }
+    .empathy__list li { padding: 16px 18px; font-size: 14px; }
+  }
+
+  /* =========================================
+     §4 3サービス比較
+     ========================================= */
+  .services-detail {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+
+  .svc-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 56px;
+    padding: 36px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .svc-detail:first-of-type { margin-top: 0; }
+
+  .svc-detail__head {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .svc-detail__num {
+    font-family: var(--font-serif);
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .svc-detail__head h3 {
+    font-size: 22px;
+    margin-bottom: 6px;
+    color: var(--purple);
+  }
+
+  .svc-detail__lead {
+    font-size: 14px;
+    color: var(--charcoal-soft);
+    line-height: 1.7;
+  }
+
+  .svc-detail__body {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .svc-detail__photo {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: var(--pale-gray);
+  }
+
+  .svc-detail__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .svc-detail__data {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .svc-detail__data > div {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .svc-detail__data > div:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .svc-detail__data dt {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    padding-top: 2px;
+  }
+
+  .svc-detail__data dd {
+    font-size: 14px;
+    color: var(--charcoal-soft);
+    line-height: 1.85;
+  }
+
+  .svc-detail__sublist {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .svc-detail__sublist li {
+    padding-left: 14px;
+    position: relative;
+    font-size: 13px;
+    color: var(--charcoal-soft);
+  }
+
+  .svc-detail__sublist li::before {
+    content: "・";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    .svc-detail { padding: 24px 20px; }
+    .svc-detail__head { flex-direction: row; gap: 14px; }
+    .svc-detail__num { font-size: 30px; }
+    .svc-detail__head h3 { font-size: 18px; }
+    .svc-detail__body { grid-template-columns: 1fr; gap: 18px; }
+    .svc-detail__data > div { grid-template-columns: 80px 1fr; gap: 12px; }
+  }
+
+  /* =========================================
+     §5 料金一覧
+     ========================================= */
+  .pricing {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+
+  .campaign {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: var(--gold-soft);
+    border: 2px solid var(--gold);
+    border-radius: var(--radius-md);
+    padding: 28px 32px;
+    margin-top: 32px;
+  }
+
+  .campaign__icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gold);
+    color: var(--paper);
+    border-radius: 50%;
+  }
+
+  .campaign__label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--orange-deep);
+    letter-spacing: 0.16em;
+  }
+
+  .campaign__main {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--purple);
+    margin: 4px 0 6px;
+    letter-spacing: 0.02em;
+  }
+
+  .campaign__note {
+    font-size: 13px;
+    color: var(--charcoal-soft);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .campaign { padding: 22px 20px; gap: 14px; }
+    .campaign__main { font-size: 18px; }
+  }
+
+  /* =========================================
+     §6 FAQ
+     ========================================= */
+  .container--narrow {
+    max-width: 820px;
+  }
+
+  .faq__list {
+    margin-top: 32px;
+  }
+
+  .faq__more {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* =========================================
+     §7 講師紹介
+     ========================================= */
+  .teachers {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+
+  .teachers__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 900px) {
+    .teachers__grid { grid-template-columns: 1fr; gap: 20px; }
+  }
+
+  /* =========================================
+     §8 アクセス
+     ========================================= */
+  .access {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .access__qr {
+    margin: 32px auto 0;
+    text-align: center;
+    max-width: 300px;
+  }
+
+  .access__qr-img {
+    background: var(--paper);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .access__qr-img img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+  }
+
+  .access__qr-note {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .access__info {
+    background: var(--paper);
+    border-radius: var(--radius-md);
+    padding: 32px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .access__info-title {
+    font-size: 18px;
+    color: var(--purple);
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--purple-line);
+  }
+
+  .access__info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .access__info-list > div {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 16px;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+  .access__info-list dt {
+    font-weight: 700;
+    color: var(--muted);
+    font-size: 12px;
+    padding-top: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  .access__info-list dd {
+    color: var(--charcoal-soft);
+    line-height: 1.7;
+  }
+
+  .access__info-list a {
+    color: var(--purple);
+    font-weight: 700;
+    border-bottom: 1px dashed var(--orange);
+  }
+
+  .access__legal {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .access__info { padding: 24px 20px; }
+    .access__info-list > div { grid-template-columns: 72px 1fr; gap: 12px; }
+  }
+</style>

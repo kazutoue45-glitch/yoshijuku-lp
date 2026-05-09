@@ -1,0 +1,28 @@
+---
+const { eyebrow, title, lead, align = "left" } = Astro.props;
+---
+
+<header class:list={["sh", `sh--${align}`]}>
+  {eyebrow && <span class="section-eyebrow">{eyebrow}</span>}
+  <h2 class="section-title" set:html={title}></h2>
+  {lead && <p class="section-lead" set:html={lead}></p>}
+</header>
+
+<style>
+  .sh {
+    margin-bottom: 32px;
+  }
+
+  .sh--center {
+    text-align: center;
+  }
+
+  .sh--center .section-lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 768px) {
+    .sh { margin-bottom: 24px; }
+  }
+</style>

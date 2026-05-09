@@ -1,0 +1,41 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+const { title, description } = Astro.props;
+const pageTitle = title
+  ? `${title}｜義塾（寝屋川市成田町）`
+  : "義塾｜寝屋川市成田町の学習塾｜中学受験・高校受験・大学受験／個別指導・クラス授業・オンライン・家庭教師";
+const pageDesc =
+  description ??
+  "寝屋川市成田町の学習塾「義塾」。リアル校舎・オンライン・家庭教師の3つの学び方から選べる地域密着型の塾。新規入塾生限定で初月授業料1ヶ月無料キャンペーン実施中。公式LINEで塾長と直接相談できます。";
+const base = import.meta.env.BASE_URL;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#1F4D3A" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Header base={base} />
+    <main>
+      <slot />
+    </main>
+    <Footer base={base} />
+  </body>
+</html>

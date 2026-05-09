@@ -1,0 +1,78 @@
+---
+const { q, a } = Astro.props;
+---
+
+<div class="qa">
+  <div class="qa__q">
+    <span class="qa__mark qa__mark--q">Q.</span>
+    <p>{q}</p>
+  </div>
+  <div class="qa__a">
+    <span class="qa__mark qa__mark--a">A.</span>
+    <p set:html={a}></p>
+  </div>
+</div>
+
+<style>
+  .qa {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .qa:last-child { border-bottom: none; }
+
+  .qa__q,
+  .qa__a {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .qa__q { margin-bottom: 12px; }
+
+  .qa__mark {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .qa__mark--q {
+    background: var(--orange);
+    color: var(--paper);
+  }
+
+  .qa__mark--a {
+    background: var(--pale-gray);
+    color: var(--purple);
+    border: 1px solid var(--purple-line);
+  }
+
+  .qa__q p {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--purple);
+    line-height: 1.7;
+    padding-top: 4px;
+  }
+
+  .qa__a p {
+    font-size: 14px;
+    color: var(--charcoal-soft);
+    line-height: 1.95;
+    padding-top: 6px;
+  }
+
+  @media (max-width: 768px) {
+    .qa { padding: 20px 0; }
+    .qa__mark { width: 28px; height: 28px; font-size: 13px; }
+    .qa__q p { font-size: 15px; }
+  }
+</style>

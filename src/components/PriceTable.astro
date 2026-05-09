@@ -1,0 +1,94 @@
+---
+const { caption, headers, rows, note } = Astro.props;
+---
+
+<div class="price">
+  {caption && <h3 class="price__caption">{caption}</h3>}
+  <div class="price__scroll">
+    <table class="price__table">
+      <thead>
+        <tr>
+          {headers.map((h) => <th>{h}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr>
+            {row.map((cell, i) => (
+              <td class={i === row.length - 1 ? "price__amt" : ""}>{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  {note && <p class="price__note" set:html={note}></p>}
+</div>
+
+<style>
+  .price {
+    margin-bottom: 36px;
+  }
+
+  .price__caption {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--purple);
+    margin-bottom: 14px;
+    padding-left: 12px;
+    border-left: 3px solid var(--orange);
+  }
+
+  .price__scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--paper);
+  }
+
+  .price__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 560px;
+  }
+
+  .price__table th,
+  .price__table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+
+  .price__table th {
+    background: var(--pale-gray);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--purple);
+    letter-spacing: 0.04em;
+    border-bottom: 2px solid var(--purple);
+  }
+
+  .price__table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .price__table tbody tr:hover {
+    background: var(--pale-gray-2);
+  }
+
+  .price__amt {
+    font-weight: 700;
+    color: var(--charcoal);
+    white-space: nowrap;
+  }
+
+  .price__note {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+</style>
