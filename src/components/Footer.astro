@@ -2,66 +2,60 @@
 const { base } = Astro.props;
 ---
 
-<footer class="site-footer">
-  <div class="site-footer__inner">
-    <div class="site-footer__brand">
-      <div class="site-footer__logo">
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <h2 class="footer__logo">
         <ruby>義塾<rt>よしじゅく</rt></ruby>
-      </div>
-      <p class="site-footer__motto">成田町の信頼できる先生に、お子様の未来を任せる。</p>
-      <p class="site-footer__desc">
+      </h2>
+      <p class="footer__motto">成田町の信頼できる先生に、お子様の未来を任せる。</p>
+      <p class="footer__desc">
         寝屋川市成田町の学習塾。リアル校舎・オンライン・家庭教師の3つの学び方で、中学受験・高校受験・大学受験すべてに対応します。
       </p>
     </div>
 
-    <div class="site-footer__cols">
-      <div>
-        <h4>サイトマップ</h4>
-        <ul>
-          <li><a href="#services">3つの学び方</a></li>
-          <li><a href="#pricing">料金</a></li>
-          <li><a href="#faq">よくあるご質問</a></li>
-          <li><a href="#teachers">講師紹介</a></li>
-          <li><a href="#access">アクセス・お問い合わせ</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>運営会社</h4>
-        <p>
-          義塾<br />
-          運営：小川探究<br />
-          <!-- 要確認: 代表者名・所在地・代表連絡先 -->
-        </p>
-        <a href="tel:0728147633" class="site-footer__tel">072-814-7633</a>
-        <p class="site-footer__addr">大阪府寝屋川市成田町32-24</p>
-      </div>
-      <div>
-        <h4>規約・お問い合わせ</h4>
-        <ul>
-          <li><a href="#">利用規約</a></li>
-          <li><a href="#">プライバシーポリシー</a></li>
-          <li><a href="#">公式LINE</a></li>
-          <!-- 要確認: 利用規約・プライバシーポリシーの公開URL／公式SNS（Instagram, X等）の運用状況 -->
-        </ul>
-      </div>
+    <div class="footer__col">
+      <h3 class="footer__h">サイトマップ</h3>
+      <ul class="footer__list">
+        <li><a href="#services">3つの学び方</a></li>
+        <li><a href="#pricing">料金</a></li>
+        <li><a href="#faq">よくあるご質問</a></li>
+        <li><a href="#teachers">講師紹介</a></li>
+        <li><a href="#access">アクセス・お問い合わせ</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h3 class="footer__h">運営会社</h3>
+      <p class="footer__entity">義塾／運営：小川探究</p>
+      <a href="tel:0728147633" class="footer__tel">072-814-7633</a>
+      <p class="footer__addr">大阪府寝屋川市成田町32-24</p>
+      <!-- 要確認: 代表者名・正式法人名 -->
+    </div>
+
+    <div class="footer__col">
+      <h3 class="footer__h">規約・お問い合わせ</h3>
+      <ul class="footer__list">
+        <li><a href="#">利用規約</a></li>
+        <li><a href="#">プライバシーポリシー</a></li>
+        <li><a href="#">公式LINE</a></li>
+        <!-- 要確認: 規約・プラポリの公開URL／公式LINE URL -->
+      </ul>
     </div>
   </div>
 
-  <div class="site-footer__bottom">
-    <span>© 2026 義塾 / 小川探究 All Rights Reserved.</span>
-    <!-- 要確認: 著作権表記の社名（小川探究 vs 株式会社○○等の正式名称） -->
-  </div>
+  <p class="footer__copy">© 2026 義塾 / 小川探究 All Rights Reserved.</p>
 </footer>
 
 <style>
-  .site-footer {
+  .footer {
     background: var(--purple-deep);
     color: var(--paper);
-    padding: 64px 0 0;
+    padding: 56px 0 28px;
     position: relative;
   }
 
-  .site-footer::before {
+  .footer::before {
     content: "";
     position: absolute;
     top: 0;
@@ -69,121 +63,138 @@ const { base } = Astro.props;
     right: 0;
     height: 2px;
     background: var(--orange);
-    opacity: 0.6;
+    opacity: 0.55;
   }
 
-  .site-footer__inner {
-    max-width: var(--container);
+  .footer__inner {
+    max-width: 720px;
     margin: 0 auto;
-    padding: 0 24px;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 56px;
+    padding: 0 28px;
   }
 
-  .site-footer__logo {
+  /* ============== ブランドエリア ============== */
+  .footer__brand {
+    margin-bottom: 36px;
+  }
+
+  .footer__logo {
     font-family: var(--font-serif);
-    font-size: 28px;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: var(--paper);
+    margin-bottom: 18px;
+  }
+
+  .footer__logo ruby rt {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.78);
+    font-family: var(--font-sans);
+    margin-bottom: 6px;
+  }
+
+  .footer__motto {
+    font-size: 16px;
     font-weight: 700;
     color: var(--paper);
-    letter-spacing: 0.1em;
-    margin-bottom: 16px;
-    line-height: 1.15;
-  }
-
-  .site-footer__logo ruby rt {
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 2px;
-    font-family: var(--font-sans);
-  }
-
-  .site-footer__motto {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.86);
+    line-height: 1.65;
     margin-bottom: 14px;
-    font-weight: 500;
-    line-height: 1.7;
+    letter-spacing: 0.02em;
   }
 
-  .site-footer__desc {
+  .footer__desc {
     font-size: 13px;
     line-height: 1.95;
     color: rgba(255, 255, 255, 0.62);
+    letter-spacing: 0.02em;
   }
 
-  .site-footer__cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 32px;
+  /* ============== 各列 ============== */
+  .footer__col {
+    margin-bottom: 32px;
   }
 
-  .site-footer__cols h4 {
-    font-size: 12px;
+  .footer__h {
+    font-size: 13px;
+    font-weight: 700;
     color: var(--orange);
     letter-spacing: 0.18em;
     margin-bottom: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
     font-family: var(--font-sans);
   }
 
-  .site-footer__cols ul {
+  .footer__list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
 
-  .site-footer__cols a {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.78);
+  .footer__list a {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.86);
     transition: color 0.2s;
   }
 
-  .site-footer__cols a:hover { color: var(--orange); }
-
-  .site-footer__cols p {
-    font-size: 13px;
-    line-height: 1.85;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 12px;
+  .footer__list a:hover {
+    color: var(--orange);
   }
 
-  .site-footer__tel {
+  .footer__entity {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.86);
+    margin-bottom: 6px;
+  }
+
+  .footer__tel {
     display: inline-block;
     font-family: var(--font-serif);
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 32px;
+    font-weight: 600;
     color: var(--paper);
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .footer__tel:hover {
+    color: var(--orange);
+  }
+
+  .footer__addr {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.02em;
+  }
+
+  /* ============== コピーライト ============== */
+  .footer__copy {
+    margin-top: 40px;
+    padding: 0 28px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
     letter-spacing: 0.04em;
   }
 
-  .site-footer__tel:hover { color: var(--orange); }
-
-  .site-footer__addr {
-    font-size: 12px !important;
-    margin-top: 6px !important;
-  }
-
-  .site-footer__bottom {
-    margin-top: 56px;
-    padding: 22px 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.5);
-    text-align: center;
-  }
-
-  @media (max-width: 900px) {
-    .site-footer__inner {
-      grid-template-columns: 1fr;
-      gap: 36px;
+  /* ============== PC ============== */
+  @media (min-width: 769px) {
+    .footer__inner {
+      max-width: 1080px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px;
     }
-    .site-footer__cols {
-      grid-template-columns: 1fr;
-      gap: 28px;
+    .footer__brand {
+      margin-bottom: 0;
+    }
+    .footer__col {
+      margin-bottom: 0;
+    }
+    .footer__logo {
+      font-size: 64px;
     }
   }
 </style>
