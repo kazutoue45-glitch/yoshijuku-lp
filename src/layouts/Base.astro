@@ -1,5 +1,4 @@
 ---
-import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
 const { title, description } = Astro.props;
@@ -9,7 +8,6 @@ const pageTitle = title
 const pageDesc =
   description ??
   "寝屋川市成田町の学習塾「義塾（よしじゅく）」。リアル校舎・オンライン・家庭教師の3つの学び方から選べる地域密着型の塾。新規入塾生限定で初月授業料1ヶ月無料キャンペーン実施中。公式LINEで塾長と直接相談できます。";
-const base = import.meta.env.BASE_URL;
 ---
 
 <!DOCTYPE html>
@@ -34,6 +32,5 @@ const base = import.meta.env.BASE_URL;
     <main>
       <slot />
     </main>
-    <Footer base={base} />
   </body>
 </html>
