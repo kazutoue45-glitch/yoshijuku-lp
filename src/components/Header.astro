@@ -1,0 +1,220 @@
+---
+import { LINE_URL } from "../consts";
+const { base } = Astro.props;
+const nav = [
+  { label: "3つの学び方", href: "#services" },
+  { label: "料金", href: "#pricing" },
+  { label: "よくあるご質問", href: "#faq" },
+  { label: "講師紹介", href: "#teachers" },
+  { label: "アクセス", href: "#access" },
+];
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href={base} class="site-logo" aria-label="義塾 よしじゅく 成田町">
+      <span class="site-logo__mark">
+        <ruby>義塾<rt>よしじゅく</rt></ruby>
+      </span>
+      <span class="site-logo__sub">成田町</span>
+    </a>
+
+    <nav class="site-nav" aria-label="メインナビゲーション">
+      <ul>
+        {nav.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href={LINE_URL} class="site-header__cta" target="_blank" rel="noopener noreferrer" aria-label="公式LINEで無料相談する">
+      公式LINEで相談
+    </a>
+
+    <button class="site-burger" aria-label="メニューを開く" data-burger>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" data-mobile-menu>
+    <ul>
+      {nav.map((item) => (
+        <li><a href={item.href} data-close>{item.label}</a></li>
+      ))}
+      <li class="mobile-menu__cta">
+        <a href={LINE_URL} class="mobile-menu__cta-btn" target="_blank" rel="noopener noreferrer">公式LINEで無料相談する</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: saturate(160%) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-header__inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .site-logo {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .site-logo__mark {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--purple);
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+  }
+
+  .site-logo__mark ruby rt {
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    margin-bottom: 1px;
+    font-family: var(--font-sans);
+  }
+
+  .site-logo__sub {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .site-nav {
+    margin-left: auto;
+  }
+
+  .site-nav ul {
+    display: flex;
+    gap: 24px;
+  }
+
+  .site-nav a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--charcoal);
+    transition: color 0.2s;
+    padding: 6px 0;
+  }
+
+  .site-nav a:hover { color: var(--orange); }
+
+  .site-header__cta {
+    background: var(--purple);
+    color: var(--paper);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 999px;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 4px 14px rgba(76, 29, 149, 0.22);
+  }
+
+  .site-header__cta:hover {
+    background: var(--purple-deep);
+    transform: translateY(-1px);
+  }
+
+  .site-burger {
+    display: none;
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-left: auto;
+  }
+
+  .site-burger span {
+    width: 22px;
+    height: 2px;
+    background: var(--charcoal);
+    transition: transform 0.25s, opacity 0.25s;
+  }
+
+  .site-burger.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .site-burger.is-open span:nth-child(2) { opacity: 0; }
+  .site-burger.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    display: none;
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    padding: 16px 20px 24px;
+  }
+
+  .mobile-menu.is-open { display: block; }
+
+  .mobile-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobile-menu a {
+    display: block;
+    padding: 14px 4px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mobile-menu__cta { padding-top: 16px; border-bottom: none; }
+
+  .mobile-menu__cta-btn {
+    display: block;
+    text-align: center;
+    width: 100%;
+    background: var(--purple);
+    color: var(--paper);
+    padding: 16px;
+    border-radius: 999px;
+    font-weight: 700;
+    border-bottom: none !important;
+  }
+
+  @media (max-width: 900px) {
+    .site-nav,
+    .site-header__cta { display: none; }
+    .site-burger { display: flex; }
+  }
+</style>
+
+<script>
+  const burger = document.querySelector("[data-burger]");
+  const menu = document.querySelector("[data-mobile-menu]");
+  burger?.addEventListener("click", () => {
+    burger.classList.toggle("is-open");
+    menu?.classList.toggle("is-open");
+  });
+  menu?.querySelectorAll("[data-close]").forEach((link) => {
+    link.addEventListener("click", () => {
+      burger?.classList.remove("is-open");
+      menu?.classList.remove("is-open");
+    });
+  });
+</script>

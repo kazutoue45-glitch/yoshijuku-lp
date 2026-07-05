@@ -1,0 +1,368 @@
+:root {
+  /* メインカラー: メインパープル（H2見出し・CTA背景・本文・リアル校舎識別を兼用） */
+  --purple: #4C1D95;
+  --purple-deep: #1A0F2E;            /* フッター背景・CTA hover */
+  --purple-soft: #EDE5F8;            /* 紫アクセントの薄背景（必要に応じて） */
+  --purple-line: #C9B8E5;            /* 紫系の薄い境界線 */
+
+  /* FV専用色: §1 ファーストビューのみで使用（同系色相・明度高め） */
+  --fv-purple: #7C3AED;
+  --fv-purple-deep: #6D28D9;
+
+  /* 補色: オレンジ（キャンペーン訴求・限定アクセント） */
+  --orange: #E87A2E;
+  --orange-deep: #C95F1A;
+  --orange-soft: #FCE9D8;
+
+  /* ベース */
+  --paper: #FFFFFF;
+  --pale-gray: #F5F6F8;              /* 区切り背景 */
+  --pale-gray-2: #FAFAFB;
+  --line: #E5E7EB;                   /* 区切り線 */
+  --muted: #6B7280;                  /* 補助文・キャプション */
+
+  /* 本文・テキスト */
+  --charcoal: #1F2937;               /* 通常本文（深いグレー、紫の文字疲労を避ける） */
+  --charcoal-soft: #4B5563;          /* 副本文 */
+
+  /* 3サービス アクセント（§2クイックナビ・§4比較・§5料金表でのみ使用） */
+  --service-real: #4C1D95;           /* リアル校舎＝メインパープルと兼用 */
+  --service-online: #2E8B57;
+  --service-tutor: #2563B8;
+
+  /* §6 声・実績セクション専用：ペールパープル背景で強調 */
+  --purple-pale: #F3EEFB;
+
+  /* §12.8 キャンペーンバッジ専用：プレミアムゴールド・グラデーション */
+  --gold-classic: #D4AF37;
+  --gold-light:   #FFE066;
+  --gold-dark:    #8B6914;
+  --gold-shadow:  #B8860B;
+  --burgundy:     #7B1F1F;            /* 金地に映える文字色 */
+
+  /* シャドウ */
+  --shadow-sm: 0 2px 10px rgba(26, 15, 46, 0.06);
+  --shadow-md: 0 12px 32px rgba(26, 15, 46, 0.1);
+  --shadow-lg: 0 28px 70px rgba(26, 15, 46, 0.16);
+
+  --font-sans: "Noto Sans JP", "Hiragino Sans", "游ゴシック", sans-serif;
+  --font-serif: "Noto Serif JP", "Hiragino Mincho ProN", "游明朝", serif;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --container: 1180px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  color: var(--charcoal);
+  background: var(--paper);
+  line-height: 1.85;
+  font-feature-settings: "palt" 1;
+  overflow-x: hidden;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  color: var(--purple);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 84px 0;
+}
+
+@media (max-width: 768px) {
+  .section { padding: 46px 0; }
+  .container { padding: 0 18px; }
+}
+
+.section--white { background: var(--paper); }
+.section--pale-gray { background: var(--pale-gray); }
+.section--pale-gray-2 { background: var(--pale-gray-2); }
+.section--purple-pale { background: var(--purple-pale); }
+.section--deep {
+  background: var(--purple-deep);
+  color: var(--paper);
+}
+.section--deep h2,
+.section--deep h3 { color: var(--paper); }
+
+/* === 背景画像セクション（全面背景・紫フィルタ無し・タイトルが画像の上に乗る） === */
+.section--bg {
+  position: relative;
+}
+
+.section--bg .container {
+  position: relative;
+  z-index: 1;
+}
+
+.section--bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right center;
+  /* 画像生成時の紫被りを CSS フィルタで中和（彩度を落とす） */
+  filter: saturate(0.55);
+}
+
+/* === オーバーレイ：白/中性グレー系のみ。紫成分なし === */
+.section--bg-empathy::before {
+  background-image:
+    linear-gradient(95deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.78) 35%, rgba(255, 255, 255, 0.3) 65%, rgba(255, 255, 255, 0) 100%),
+    url("/claude-code-keiei/yoshijuku/images/section-empathy.jpg");
+}
+
+.section--bg-reasons::before {
+  background-image:
+    linear-gradient(95deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.78) 35%, rgba(255, 255, 255, 0.3) 65%, rgba(255, 255, 255, 0) 100%),
+    url("/claude-code-keiei/yoshijuku/images/section-reasons.jpg");
+}
+
+.section--bg-voices::before {
+  background-image:
+    linear-gradient(95deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.78) 35%, rgba(255, 255, 255, 0.3) 65%, rgba(255, 255, 255, 0) 100%),
+    url("/claude-code-keiei/yoshijuku/images/section-voices.jpg");
+}
+
+.section--bg-faq::before {
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.92) 100%),
+    url("/claude-code-keiei/yoshijuku/images/section-faq.jpg");
+  background-position: center center;
+}
+
+/* §2 信頼帯：パープル系の薄いオーバーレイで写真を活かしつつ可読性確保 */
+.section--bg-trust::before {
+  background-image:
+    linear-gradient(180deg, rgba(243, 238, 251, 0.85) 0%, rgba(243, 238, 251, 0.92) 60%, rgba(243, 238, 251, 0.96) 100%),
+    url("/claude-code-keiei/yoshijuku/images/section-trust.jpg");
+  background-position: center center;
+}
+
+/* §7 講師紹介：白系オーバーレイで写真の質感を残しつつ本文を読ませる */
+.section--bg-teachers::before {
+  background-image:
+    linear-gradient(95deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.86) 40%, rgba(255, 255, 255, 0.62) 100%),
+    url("/claude-code-keiei/yoshijuku/images/section-teachers.jpg");
+}
+
+/* PC: テキストコンテナを左半分に押し込む */
+@media (min-width: 901px) {
+  .section--bg-empathy .container,
+  .section--bg-reasons .container,
+  .section--bg-voices .container {
+    max-width: 60%;
+    margin-left: max(24px, calc((100% - var(--container)) / 2));
+    margin-right: auto;
+    padding-left: 0;
+  }
+}
+
+/* === スマホ：全面背景＋上にタイトルを乗せる構造、紫フィルタなし === */
+@media (max-width: 900px) {
+  .section--bg-empathy::before,
+  .section--bg-reasons::before,
+  .section--bg-voices::before,
+  .section--bg-faq::before {
+    background-position: 70% center;
+  }
+  .section--bg-empathy::before {
+    background-image:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.82) 38%, rgba(255, 255, 255, 0.96) 100%),
+      url("/claude-code-keiei/yoshijuku/images/section-empathy.jpg");
+  }
+  .section--bg-reasons::before {
+    background-image:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.82) 38%, rgba(255, 255, 255, 0.96) 100%),
+      url("/claude-code-keiei/yoshijuku/images/section-reasons.jpg");
+  }
+  .section--bg-voices::before {
+    background-image:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.82) 38%, rgba(255, 255, 255, 0.96) 100%),
+      url("/claude-code-keiei/yoshijuku/images/section-voices.jpg");
+  }
+}
+
+/* スマホ：base font-size 確保 */
+@media (max-width: 768px) {
+  body { font-size: 16px; }
+}
+
+.section-anchor {
+  scroll-margin-top: 80px;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--orange);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: clamp(28px, 4.6vw, 44px);
+  margin-bottom: 28px;
+  line-height: 1.5;
+  color: var(--purple);
+  letter-spacing: 0.02em;
+}
+
+.section-lead {
+  font-size: 17px;
+  color: var(--charcoal-soft);
+  margin-bottom: 0;
+  max-width: 760px;
+  line-height: 2.05;
+}
+
+@media (max-width: 768px) {
+  .section-lead { font-size: 15.5px; line-height: 1.95; }
+}
+
+.text-purple { color: var(--purple); }
+.text-orange { color: var(--orange); }
+.text-muted { color: var(--muted); }
+
+.highlight-orange {
+  background: linear-gradient(transparent 60%, rgba(232, 122, 46, 0.28) 60%);
+  padding: 0 2px;
+}
+
+/* === 強調マーカー（ZERO LP参考・キーワード装飾） === */
+.mark {
+  background: linear-gradient(transparent 60%, rgba(247, 199, 64, 0.55) 60%);
+  font-weight: 700;
+  padding: 0 2px;
+}
+
+.mark--orange {
+  background: linear-gradient(transparent 60%, rgba(247, 122, 31, 0.32) 60%);
+  font-weight: 700;
+  padding: 0 2px;
+}
+
+.mark--purple {
+  background: linear-gradient(transparent 60%, rgba(124, 58, 237, 0.18) 60%);
+  font-weight: 700;
+  padding: 0 2px;
+  color: var(--purple);
+}
+
+/* === 数字強調（実績・人数・金額） === */
+.num {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 1.35em;
+  color: var(--purple);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  vertical-align: -0.04em;
+  margin: 0 0.1em;
+}
+
+.num--orange { color: var(--orange-deep); }
+.num--gold { color: var(--gold-classic); }
+
+.callout {
+  background: var(--pale-gray);
+  border-radius: var(--radius-md);
+  padding: 28px 32px;
+  font-size: 15px;
+  line-height: 1.95;
+  color: var(--charcoal);
+}
+
+.callout--orange {
+  background: var(--orange-soft);
+  border: 2px solid var(--orange);
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  .callout { padding: 22px 20px; }
+}
+
+/* =========================================
+   画像プレースホルダー（Codex生成画像の到着前用）
+   ========================================= */
+.img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pale-gray);
+  border: 1.5px dashed var(--purple-line);
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-align: center;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  line-height: 1.5;
+}
+
+.img-placeholder--gold {
+  background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold-classic) 60%, var(--gold-shadow) 100%);
+  border: 2px double var(--gold-dark);
+  color: var(--burgundy);
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.img-placeholder--circle {
+  border-radius: 50%;
+  aspect-ratio: 1;
+}

@@ -1,0 +1,149 @@
+---
+const {
+  badge,
+  title,
+  subtitle,
+  price,
+  unit = "/ 月（税込）",
+  meta = [],
+  highlight = false,
+  accent = "var(--purple)",
+} = Astro.props;
+---
+
+<article
+  class:list={["plan", highlight && "plan--highlight"]}
+  style={`--accent:${accent};`}
+>
+  {badge && <span class="plan__badge">{badge}</span>}
+  <h4 class="plan__title">{title}</h4>
+  {subtitle && <p class="plan__subtitle">{subtitle}</p>}
+  <div class="plan__price">
+    <span class="plan__price-yen">¥</span>
+    <span class="plan__price-num">{price}</span>
+    <span class="plan__price-unit">{unit}</span>
+  </div>
+  {meta.length > 0 && (
+    <ul class="plan__meta">
+      {meta.map((m) => (
+        <li>
+          <span class="plan__meta-label">{m.label}</span>
+          <span class="plan__meta-value">{m.value}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+</article>
+
+<style>
+  .plan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: var(--paper);
+    border-radius: var(--radius-md);
+    padding: 32px 28px;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+  }
+
+  .plan:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .plan--highlight {
+    background: color-mix(in srgb, var(--accent) 6%, var(--paper));
+  }
+
+  .plan__badge {
+    align-self: flex-start;
+    background: var(--accent);
+    color: var(--paper);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.08em;
+  }
+
+  .plan__title {
+    font-size: 18px;
+    color: var(--charcoal);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+
+  .plan__subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: -8px;
+  }
+
+  .plan__price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-top: 4px;
+    color: var(--accent);
+    font-family: var(--font-serif);
+    line-height: 1;
+  }
+
+  .plan__price-yen {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .plan__price-num {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+  }
+
+  .plan__price-unit {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    margin-left: 4px;
+  }
+
+  .plan__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+    margin-top: 4px;
+  }
+
+  .plan__meta li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--charcoal-soft);
+  }
+
+  .plan__meta-label {
+    color: var(--muted);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .plan__meta-value {
+    text-align: right;
+    color: var(--charcoal);
+  }
+
+  @media (max-width: 540px) {
+    .plan { padding: 24px 22px; }
+    .plan__title { font-size: 16px; }
+    .plan__price-num { font-size: 28px; }
+  }
+</style>

@@ -1,0 +1,115 @@
+---
+const {
+  avatarSrc,
+  name,
+  role,
+  quote,
+} = Astro.props;
+---
+
+<article class="voice">
+  <span class="voice__quote-mark" aria-hidden="true">&ldquo;</span>
+  <blockquote class="voice__quote" set:html={quote}></blockquote>
+  <footer class="voice__author">
+    <div class="voice__avatar">
+      {avatarSrc ? (
+        <img src={avatarSrc} alt={`${name}のアイコン`} loading="lazy" />
+      ) : (
+        <span class="img-placeholder img-placeholder--circle">準備中</span>
+      )}
+    </div>
+    <div class="voice__meta">
+      <span class="voice__name">{name}</span>
+      {role && <span class="voice__role">{role}</span>}
+    </div>
+  </footer>
+</article>
+
+<style>
+  .voice {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: var(--paper);
+    border-radius: var(--radius-md);
+    padding: 36px 30px 28px;
+    box-shadow: var(--shadow-md);
+    height: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .voice:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .voice__quote-mark {
+    position: absolute;
+    top: 12px;
+    left: 18px;
+    font-family: var(--font-serif);
+    font-size: 56px;
+    line-height: 1;
+    color: var(--purple);
+    opacity: 0.2;
+  }
+
+  .voice__quote {
+    font-size: 14.5px;
+    line-height: 2;
+    color: var(--charcoal-soft);
+    padding-left: 12px;
+    flex-grow: 1;
+  }
+
+  .voice__author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+  }
+
+  .voice__avatar {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--paper);
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--purple-line);
+  }
+
+  /* 線画イラストアバターは contain で全体表示 */
+  .voice__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .voice__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .voice__name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--purple);
+  }
+
+  .voice__role {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 768px) {
+    .voice { padding: 28px 22px 20px; }
+    .voice__quote { font-size: 14px; }
+  }
+</style>

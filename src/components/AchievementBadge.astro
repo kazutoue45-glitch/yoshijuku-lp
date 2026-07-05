@@ -1,0 +1,49 @@
+---
+const { label, schools = [] } = Astro.props;
+---
+
+<div class="ach">
+  {label && <span class="ach__label">{label}</span>}
+  <ul class="ach__list">
+    {schools.map((s) => <li>{s}</li>)}
+  </ul>
+</div>
+
+<style>
+  .ach {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .ach__label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--purple);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .ach__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .ach__list li {
+    background: var(--paper);
+    border: 1.5px solid var(--purple-line);
+    color: var(--purple);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 8px 14px;
+    border-radius: 999px;
+    line-height: 1.4;
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (max-width: 768px) {
+    .ach__list li { font-size: 12px; padding: 7px 12px; }
+  }
+</style>

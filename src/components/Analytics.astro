@@ -1,0 +1,24 @@
+---
+// Microsoft Clarity 計測タグ（ヒートマップ・録画・基本アクセス解析）
+// - consts.ts の CLARITY_PROJECT_ID が空のあいだは何も出力しない（安全な無効状態）
+// - 本番ビルド時のみ計測する。astro dev でのローカルアクセスは集計対象外
+// - スクロール到達・クリック位置・公式LINE(lin.ee)への遷移は録画とヒートマップで自動的に記録される
+import { CLARITY_PROJECT_ID } from "../consts";
+
+const enabled = Boolean(CLARITY_PROJECT_ID) && import.meta.env.PROD;
+---
+
+{
+  enabled && (
+    <script
+      is:inline
+      set:html={`
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "${CLARITY_PROJECT_ID}");
+      `}
+    />
+  )
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="kokufu-bg" cx="0.6" cy="0.4">
+      <stop offset="0" stop-color="#FCE9D8"/>
+      <stop offset="1" stop-color="#E87A2E" stop-opacity="0.42"/>
+    </radialGradient>
+  </defs>
+  <rect width="240" height="240" fill="url(#kokufu-bg)"/>
+  <circle cx="120" cy="100" r="32" fill="#4C1D95" opacity="0.6"/>
+  <path d="M70 200 Q120 145 170 200" fill="#4C1D95" opacity="0.6"/>
+  <text x="120" y="222" text-anchor="middle" font-family="serif" font-size="11" fill="#4C1D95" letter-spacing="3">KOKUFU</text>
+</svg>
