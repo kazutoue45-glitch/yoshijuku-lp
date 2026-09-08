@@ -11,7 +11,7 @@ const { base } = Astro.props;
       </div>
       <p class="site-footer__motto">成田町の信頼できる先生に、お子様の未来を任せる。</p>
       <p class="site-footer__desc">
-        成田町の学習塾。リアル校舎・オンライン・家庭教師の3つの学び方で、中学受験・高校受験・大学受験すべてに対応します。
+        成田町の学習塾。校舎・家庭教師の2つの学び方で、中学受験・高校受験・大学受験すべてに対応します。プレゼン講座はオプションで受講できます。
       </p>
     </div>
 
@@ -19,11 +19,11 @@ const { base } = Astro.props;
       <div>
         <h4>サイトマップ</h4>
         <ul>
-          <li><a href="#services">3つの学び方</a></li>
-          <li><a href="#pricing">料金</a></li>
-          <li><a href="#faq">よくあるご質問</a></li>
-          <li><a href="#teachers">講師紹介</a></li>
-          <li><a href="#access">アクセス・お問い合わせ</a></li>
+          <li><a href={`${base}#services`}>2つの学び方</a></li>
+          <li><a href={`${base}#pricing`}>料金</a></li>
+          <li><a href={`${base}#faq`}>よくあるご質問</a></li>
+          <li><a href={`${base}#teachers`}>講師紹介</a></li>
+          <li><a href={`${base}#access`}>アクセス・お問い合わせ</a></li>
         </ul>
       </div>
       <div>
@@ -39,10 +39,9 @@ const { base } = Astro.props;
       <div>
         <h4>規約・お問い合わせ</h4>
         <ul>
-          <li><a href="#">利用規約</a></li>
-          <li><a href="#">プライバシーポリシー</a></li>
+          <li><a href={`${base}terms/`}>利用規約</a></li>
+          <li><a href={`${base}privacy/`}>プライバシーポリシー</a></li>
           <li><a href={LINE_URL} target="_blank" rel="noopener noreferrer">公式LINE</a></li>
-          <!-- 要確認: 利用規約・プライバシーポリシーの公開URL／公式SNS（Instagram, X等）の運用状況 -->
         </ul>
       </div>
     </div>

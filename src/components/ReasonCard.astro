@@ -13,7 +13,7 @@ const {
     <span class="reason__num">{number}</span>
     <div class="reason__icon">
       {iconSrc ? (
-        <img src={iconSrc} alt={iconAlt ?? ""} loading="lazy" />
+        <img src={iconSrc} alt={iconAlt ?? ""} width="360" height="360" loading="lazy" decoding="async" />
       ) : (
         <span class="img-placeholder img-placeholder--circle">画像準備中<br />（Codex生成）</span>
       )}

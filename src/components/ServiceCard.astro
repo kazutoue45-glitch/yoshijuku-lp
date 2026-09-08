@@ -4,6 +4,8 @@ const {
   title,
   shortLabel,
   bgImage,
+  bgWidth,
+  bgHeight,
   bgPosition = "center center",
   anchorId,
   accentColor,
@@ -18,7 +20,7 @@ const {
   aria-label={title}
 >
   <div class="svc-card__bg">
-    {bgImage && <img src={bgImage} alt="" loading="lazy" style={`object-position: ${bgPosition};`} />}
+    {bgImage && <img src={bgImage} alt="" width={bgWidth} height={bgHeight} loading="lazy" decoding="async" style={`object-position: ${bgPosition};`} />}
     <span class="svc-card__overlay" aria-hidden="true"></span>
   </div>
 
@@ -26,7 +28,7 @@ const {
 
   <div class="svc-card__content">
     <span class="svc-card__num">{index}</span>
-    <h3 class="svc-card__title">{title}</h3>
+    <p class="svc-card__title">{title}</p>
     {shortLabel && <span class="svc-card__sub">{shortLabel}</span>}
     <span class="svc-card__cta" aria-hidden="true">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -75,7 +77,7 @@ const {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--accent) 30%, transparent) 0%, color-mix(in srgb, var(--accent) 92%, transparent) 100%);
+      linear-gradient(180deg, color-mix(in srgb, var(--accent) 6%, transparent) 0%, color-mix(in srgb, var(--accent) 52%, transparent) 100%);
   }
 
   .svc-card__content {
@@ -114,7 +116,7 @@ const {
 
   .svc-card__sub {
     display: block;
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.86);
     letter-spacing: 0.06em;
@@ -139,21 +141,21 @@ const {
     transform: translateX(4px);
   }
 
-  /* スマホでも3列横並びを維持（参考画像のように縦長カラム3つ） */
+  /* スマホでも学び方カードの横並びを維持 */
   @media (max-width: 768px) {
     .svc-card { aspect-ratio: 3 / 5.2; }
     .svc-card__content { padding: 16px 8px 14px; }
     .svc-card__num { font-size: 26px; top: 12px; left: 8px; }
     /* 改行廃止：letter-spacing で詰め、palt 効きながら1行で収める */
     .svc-card__title { font-size: 13.5px; line-height: 1.4; margin-bottom: 6px; letter-spacing: -0.04em; }
-    .svc-card__sub { font-size: 9.5px; margin-bottom: 10px; line-height: 1.45; letter-spacing: -0.02em; }
+    .svc-card__sub { font-size: 12px; margin-bottom: 10px; line-height: 1.45; letter-spacing: -0.02em; }
     .svc-card__cta { width: 28px; height: 28px; }
     .svc-card__cta svg { width: 14px; height: 14px; }
   }
 
   @media (max-width: 380px) {
-    .svc-card__title { font-size: 12px; letter-spacing: -0.05em; }
-    .svc-card__sub { font-size: 9px; }
+    .svc-card__title { font-size: 13px; letter-spacing: -0.05em; }
+    .svc-card__sub { font-size: 12px; }
     .svc-card__num { font-size: 22px; }
   }
 
@@ -200,6 +202,12 @@ const {
     0%   { background-position: 200% center; }
     20%  { background-position: -100% center; }
     100% { background-position: -100% center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .svc-card,
+    .svc-card__bg img,
+    .svc-card__cta { transition: none; }
+    .svc-card__new { animation: none; }
   }
   @media (max-width: 768px) {
     .svc-card__new {

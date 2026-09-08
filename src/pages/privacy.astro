@@ -1,0 +1,76 @@
+---
+import Base from "../layouts/Base.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Base title="プライバシーポリシー" description="義塾ウェブサイトのプライバシーポリシーです。">
+  <section class="legal">
+    <div class="legal__inner">
+      <a class="legal__back" href={base}>← 義塾トップへ戻る</a>
+      <header class="legal__header">
+        <p class="legal__eyebrow">PRIVACY POLICY</p>
+        <h1>プライバシーポリシー</h1>
+        <p>義塾（運営：小川探究）は、本サイトの利用者に関する情報を以下の方針に基づいて取り扱います。</p>
+      </header>
+
+      <div class="legal__content">
+        <section>
+          <h2>1．取得する情報</h2>
+          <p>本サイトでは、アクセス日時、閲覧ページ、使用端末・ブラウザ、参照元、クリックやスクロールなどの利用状況を取得する場合があります。公式LINEや電話でお問い合わせいただいた場合は、利用者が提供した氏名、連絡先、相談内容などを取得します。</p>
+        </section>
+        <section>
+          <h2>2．利用目的</h2>
+          <p>取得した情報は、お問い合わせへの回答、授業・サービスの案内、サイトの利用状況の分析、表示内容やサービスの改善、不正利用の防止のために利用します。</p>
+        </section>
+        <section>
+          <h2>3．アクセス解析</h2>
+          <p>本サイトでは、Microsoft Clarityを利用して閲覧状況を分析します。ClarityはCookie等を使用し、操作状況、閲覧情報、端末・ブラウザ情報などを収集する場合があります。これらの情報は、<a href="https://privacy.microsoft.com/ja-jp/privacystatement" target="_blank" rel="noopener noreferrer">Microsoftのプライバシーステートメント</a>に基づいて取り扱われます。</p>
+        </section>
+        <section>
+          <h2>4．外部サービス</h2>
+          <p>本サイトでは、Google マップおよびLINEへのリンクを利用しています。各サービス上で取得される情報は、それぞれの運営者が定める規約とプライバシーポリシーに基づいて取り扱われます。</p>
+        </section>
+        <section>
+          <h2>5．第三者提供</h2>
+          <p>法令に基づく場合を除き、本人の同意なく個人情報を第三者へ提供しません。業務委託先へ取り扱いを委託する場合は、必要な範囲に限定し、適切に管理します。</p>
+        </section>
+        <section>
+          <h2>6．安全管理</h2>
+          <p>取得した情報の漏えい、紛失、改ざん、不正アクセスを防ぐため、必要かつ適切な安全管理措置を講じます。</p>
+        </section>
+        <section>
+          <h2>7．開示・訂正・削除</h2>
+          <p>保有する個人情報の開示、訂正、利用停止または削除を希望される場合は、ご本人であることを確認した上で、法令に従って対応します。</p>
+        </section>
+        <section>
+          <h2>8．方針の変更</h2>
+          <p>法令やサービス内容の変更に応じて、本方針を変更する場合があります。変更後の内容は、本サイトへの掲載時から適用されます。</p>
+        </section>
+        <section>
+          <h2>9．お問い合わせ</h2>
+          <p>個人情報の取り扱いに関するお問い合わせは、公式LINEまたは電話（<a href="tel:0728147633">072-814-7633</a>）からご連絡ください。</p>
+        </section>
+        <p class="legal__date">制定日：2026年9月7日</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal { padding: 72px 20px 96px; background: var(--pale-gray-2); }
+  .legal__inner { width: min(820px, 100%); margin: 0 auto; }
+  .legal__back { display: inline-block; margin-bottom: 32px; color: var(--purple); font-weight: 700; }
+  .legal__back:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+  .legal__header { margin-bottom: 32px; }
+  .legal__eyebrow { margin-bottom: 8px; color: var(--orange); font-size: 12px; font-weight: 900; letter-spacing: 0.16em; }
+  .legal__header h1 { margin-bottom: 16px; font-family: var(--font-serif); font-size: clamp(32px, 6vw, 48px); }
+  .legal__header p { color: var(--charcoal-soft); }
+  .legal__content { padding: clamp(24px, 5vw, 48px); border: 1px solid var(--line); border-radius: 16px; background: var(--paper); box-shadow: var(--shadow-sm); }
+  .legal__content section + section { margin-top: 32px; }
+  .legal__content h2 { margin-bottom: 10px; font-size: 19px; }
+  .legal__content p { color: var(--charcoal-soft); font-size: 15px; line-height: 1.9; }
+  .legal__content a { color: var(--purple); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+  .legal__date { margin-top: 40px; text-align: right; }
+  @media (max-width: 768px) { .legal { padding: 40px 16px 64px; } }
+</style>

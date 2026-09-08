@@ -15,74 +15,71 @@ const base = import.meta.env.BASE_URL;
 
 // §2 信頼帯：合格校（写真があるものはWikipediaから、無いものは色面プレースホルダ）
 const passSchools = [
-  { name: "大阪国際", group: "中学受験", img: "osaka-kokusai.jpg" },
-  { name: "常翔啓光学園", group: "中学受験", img: "keiko.jpg" },
-  { name: "寝屋川", group: "高校受験", img: "neyagawa.jpg" },
-  { name: "東", group: "高校受験", img: "higashi.jpg" },
-  { name: "牧野", group: "高校受験", img: "makino.jpg" },
-  { name: "いちりつ", group: "高校受験", img: "ichiritsu.jpg" },
-  { name: "枚方", group: "高校受験", img: "hirakata.jpg" },
-  { name: "香里丘", group: "高校受験", img: "korigaoka.jpg" },
-  { name: "北かわち皐が丘", group: "高校受験", img: "kitakawachi.jpg" },
-  { name: "大阪国際", group: "高校受験", img: "osaka-kokusai.jpg" },
-  { name: "常翔啓光学園", group: "高校受験", img: "keiko.jpg" },
-  { name: "東海大学付属大阪仰星", group: "高校受験", img: "gyosei.jpg" },
-  { name: "香里ヌヴェール学院", group: "高校受験", img: "kori-nuvelle.jpg" },
-  { name: "四條畷学園", group: "高校受験", img: "shijonawate-gakuen.jpg" },
+  { name: "大阪国際", group: "中学受験", img: "osaka-kokusai.webp" },
+  { name: "常翔啓光学園", group: "中学受験", img: "keiko.webp" },
+  { name: "寝屋川", group: "高校受験", img: "neyagawa.webp" },
+  { name: "東", group: "高校受験", img: "higashi.webp" },
+  { name: "牧野", group: "高校受験", img: "makino.webp" },
+  { name: "いちりつ", group: "高校受験", img: "ichiritsu.webp" },
+  { name: "枚方", group: "高校受験", img: "hirakata.webp" },
+  { name: "香里丘", group: "高校受験", img: "korigaoka.webp" },
+  { name: "北かわち皐が丘", group: "高校受験", img: "kitakawachi.webp" },
+  { name: "大阪国際", group: "高校受験", img: "osaka-kokusai.webp" },
+  { name: "常翔啓光学園", group: "高校受験", img: "keiko.webp" },
+  { name: "東海大学付属大阪仰星", group: "高校受験", img: "gyosei.webp" },
+  { name: "香里ヌヴェール学院", group: "高校受験", img: "kori-nuvelle.webp" },
+  { name: "四條畷学園", group: "高校受験", img: "shijonawate-gakuen.webp" },
 ];
 
-// 3サービス（クイックナビ用・縦長カラムカード）
+// ファーストビュー直下のクイックナビ（縦長カラムカード）
 const services = [
   {
     index: "01",
-    title: "義塾（リアル校舎）",
+    title: "義塾",
     shortLabel: "成田町の校舎で学ぶ",
     anchorId: "service-real",
     accentColor: "#4C1D95",
-    bgImage: `${base}images/hero-real.jpg`,
+    bgImage: `${base}images/optimized/hero-real.webp`,
+    bgWidth: 1200,
+    bgHeight: 1600,
     // 机・椅子の主役群を見せる
     bgPosition: "70% center",
   },
   {
     index: "02",
-    title: "義塾オンライン",
-    shortLabel: "ご自宅から1対1",
-    anchorId: "service-online",
-    accentColor: "#2E8B57",
-    bgImage: `${base}images/hero-online.jpg`,
-    // PC画面（中央）と生徒（右）の両方が縦長窓に収まるよう中央寄り右で
-    bgPosition: "62% center",
-  },
-  {
-    index: "03",
     title: "義塾の家庭教師",
     shortLabel: "講師がご自宅へ訪問",
     anchorId: "service-tutor",
     accentColor: "#2563B8",
-    bgImage: `${base}images/hero-tutor.jpg`,
+    bgImage: `${base}images/optimized/hero-tutor.webp`,
+    bgWidth: 1400,
+    bgHeight: 788,
     // 生徒（中央寄り）と講師（右）の2人セットを縦長窓に収める
     bgPosition: "75% center",
-    isNew: true,
+  },
+  {
+    index: "03",
+    title: "アクセス",
+    shortLabel: "お問い合わせ・所在地",
+    anchorId: "access",
+    accentColor: "#1F6B45",
+    bgImage: `${base}images/optimized/building-sign.webp`,
+    bgWidth: 960,
+    bgHeight: 1280,
+    // 義塾の看板とインターホンがカード中央に収まる位置
+    bgPosition: "center center",
   },
 ];
 
-// 3サービス比較表用（§5.6 スキャナブル）
+// 2つの学び方の比較表用（§5.6 スキャナブル）
 const servicesCompare = [
   {
-    name: "リアル校舎",
+    name: "校舎",
     target: "小3〜高3",
     form: "個別／クラス",
-    price: "14,300〜44,000円",
+    price: "11,000円～35,200円",
     forWhom: "通塾可能・集団で切磋琢磨",
     accent: "#4C1D95",
-  },
-  {
-    name: "オンライン",
-    target: "小4〜社会人",
-    form: "1対1（4講座）",
-    price: "22,000円",
-    forWhom: "専門領域を深掘り",
-    accent: "#2E8B57",
   },
   {
     name: "家庭教師",
@@ -98,7 +95,7 @@ const servicesCompare = [
 const empathyItems = [
   "お子様のテストの点数が伸び悩んでいる",
   "受験までに間に合うか不安",
-  "子どもに合う指導形態（個別／クラス／オンライン／家庭教師）が分からない",
+  "子どもに合う指導形態（個別／クラス／家庭教師）が分からない",
   "通塾の送迎が大変",
   "自宅学習だと集中できない",
   "進路や勉強法を相談できる相手が欲しい",
@@ -108,8 +105,8 @@ const empathyItems = [
 const solveItems = [
   "学び方から見直し、点数の伸びる指導を設計します",
   "入塾面談で、受験までのカリキュラムを一緒に設計します",
-  "リアル校舎／オンライン／家庭教師の3つから最適な形をご提案します",
-  "ご自宅で受けられるオンライン・家庭教師も選べます",
+  "校舎／家庭教師の2つから最適な形をご提案します",
+  "ご自宅で受けられる家庭教師も選べます",
   "集中できる校舎環境と週次の伴走で学習を習慣化します",
   "塾長と公式LINEで直接ご相談いただけます",
 ];
@@ -124,29 +121,29 @@ const reasons = [
       "進路相談・成績不振の相談・通塾相談まで、公式LINEから直接連絡可能",
       "担当が変わっても、塾長は変わらず伴走する",
     ],
-    iconSrc: `${base}images/reason-icon-line.png`,
+    iconSrc: `${base}images/optimized/reason-icon-line.webp`,
     iconAlt: "公式LINEで塾長と直接つながる",
   },
   {
     number: "02",
     title: "「お子様の状況に、塾を合わせる。」",
     bullets: [
-      "リアル校舎・オンライン1対1・家庭教師訪問の3サービスを併走",
+      "校舎・家庭教師訪問の2サービスを併走",
       "部活・習い事・送迎事情・性格・志望校に合わせて最適な学び方を提案",
       "入塾後も状況変化に応じて指導形態を柔軟に変更可能",
     ],
-    iconSrc: `${base}images/reason-icon-fork.png`,
-    iconAlt: "3つの学び方から選べる柔軟性",
+    iconSrc: `${base}images/optimized/reason-icon-fork.webp`,
+    iconAlt: "2つの学び方から選べる柔軟性",
   },
   {
     number: "03",
     title: "「ベテランから若手まで、得意領域を持つ9人体制。」",
     bullets: [
       "中学受験・高校受験・大学受験すべてに対応できる講師布陣",
-      "TOEIC990点23回連続満点・英検1級保持のスペシャリストも在籍",
+      "プレゼン講座など、得意領域を持つ講師が在籍",
       "1人の講師に依存しないチーム指導で、苦手単元を講師同士でカバー",
     ],
-    iconSrc: `${base}images/reason-icon-team.png`,
+    iconSrc: `${base}images/optimized/reason-icon-team.webp`,
     iconAlt: "9名の講師チーム",
   },
 ];
@@ -157,19 +154,19 @@ const parentVoices = [
     name: "中高生の姉妹のお母様",
     role: "中高生姉妹／受験対応",
     quote: "中高生の姉妹でお世話になっております。<br />先生方は皆様優しく、アットホームな雰囲気の中で楽しく学べているようです。<br />自習室も積極的に利用させていただいており、誘惑の多い自宅よりも集中して取り組める環境に感謝しています。<br />受験期には的確なデータ分析で娘を合格へと導いてくださり、勉強からメンタルまで幅広く支えていただきました。非常に信頼できる塾として、これからも通い続けたいと思います。",
-    avatarSrc: `${base}images/voice-avatar-mother-1.png`,
+    avatarSrc: `${base}images/optimized/voice-avatar-mother-1.webp`,
   },
   {
     name: "中学生のお母様",
     role: "中学生／個別指導",
     quote: "先生方がとても親身になって色んな話を聞いて下さるので、とても居心地が良く、通いやすく、以前よりも前向きに勉強に向き合えるようになっています。<br />勉強だけでなく、プレゼンなどにも力を入れておられるので、色んな事を学べるのも魅力のひとつです。<br />テストに向けて色んな対策をして下さるので、親としてもとても安心です。",
-    avatarSrc: `${base}images/voice-avatar-mother-2.png`,
+    avatarSrc: `${base}images/optimized/voice-avatar-mother-2.webp`,
   },
   {
     name: "高校生のお母様",
     role: "高校生／クラス授業",
     quote: "開校当初よりお世話になり現在高1です。受験の折には本人、保護者の意思を尊重してくださり、また勉強面のみではなく精神的なサポートもしていただき不安なく受験当日を迎えることができました。<br />塾にはベテランの先生だけでなく大学生の先生もいて、子供にとってはお兄ちゃんお姉ちゃんみたいで接しやすく質問もしやすい環境だと思います。<br />また学習面以外でもイベントなどを企画してくださり、普段からのコミュニケーションを大切にしてくださっています。",
-    avatarSrc: `${base}images/voice-avatar-mother-3.png`,
+    avatarSrc: `${base}images/optimized/voice-avatar-mother-3.webp`,
   },
 ];
 
@@ -185,7 +182,7 @@ const faqs = [
   },
   {
     q: "無料体験はできますか？",
-    a: "はい、公式LINE登録後、塾長との個別相談を経て無料体験授業をご案内します（リアル校舎・オンライン・家庭教師いずれも対応）。",
+    a: "はい、公式LINE登録後、塾長との個別相談を経て無料体験授業をご案内します（校舎・家庭教師に対応）。",
   },
   {
     q: "途中で退塾する場合の手続きは？",
@@ -193,10 +190,10 @@ const faqs = [
   },
   {
     q: "部活や習い事と両立できますか？",
-    a: "はい、リアル校舎は17:00〜21:40の中から時間帯を選択でき、家庭教師は曜日・時間をご家庭の都合に合わせて調整します。オンラインなら移動時間ゼロで両立しやすくなります。",
+    a: "はい、通塾は17:00〜21:40の中から時間帯を選択でき、家庭教師は曜日・時間をご家庭の都合に合わせて調整します。家庭教師なら移動時間を抑えて両立しやすくなります。",
   },
   {
-    q: "途中で指導形態（リアル↔オンライン↔家庭教師）を変更できますか？",
+    q: "途中で指導形態（校舎↔家庭教師）を変更できますか？",
     a: "状況に応じて柔軟にご相談いただけます。塾長との個別面談で最適な形をご提案します。<!-- 要確認: 形態変更時の事務手続き -->",
   },
   {
@@ -223,7 +220,7 @@ const faqs = [
 
     {/* FV画像エリア（実写：義塾校舎外観＋キャッチコピーオーバーレイ） */}
     <div class="hero__photo">
-      <img src={`${base}images/building-exterior.jpg`} alt="義塾の校舎外観（成田町）" loading="eager" />
+      <img src={`${base}images/optimized/building-exterior.webp`} alt="義塾の校舎外観（成田町）" width="1440" height="1920" loading="eager" fetchpriority="high" decoding="async" />
       <span class="hero__photo-tint" aria-hidden="true"></span>
 
       {/* §1 写真上オーバーレイ：成田町の学習塾（赤枠位置・建物上部左／シャドーで可読性確保） */}
@@ -231,28 +228,44 @@ const faqs = [
 
       {/* タイトル：義塾ロゴ（毛筆書道・透過PNG） */}
       <h1 class="hero__catch">
-        <img src={`${base}images/logo-yoshijuku.png`} alt="義塾（よしじゅく）" class="hero__logo" loading="eager" />
+        <img src={`${base}images/optimized/logo-yoshijuku.webp`} alt="義塾（よしじゅく）" class="hero__logo" width="960" height="720" loading="eager" fetchpriority="high" decoding="async" />
       </h1>
 
       {/* §1 円形メダル型ゴールドバッジ（写真下端寄り・白パネルにまたぐ） */}
       <div class="hero__medal" aria-label="新規入塾生限定 初月授業料1ヶ月無料">
-        <img src={`${base}images/badge-medal.png`} alt="新規入塾生限定 初月授業料1ヶ月無料" loading="eager" />
+        <img src={`${base}images/optimized/badge-medal.webp`} alt="新規入塾生限定 初月授業料1ヶ月無料" width="640" height="640" loading="eager" decoding="async" />
       </div>
     </div>
 
-    {/* 下段：リード文＋9人講師シルエット（画像として独立表示・素材を活かす） */}
+    {/* 下段：義塾の想い＋9人講師シルエット（画像として独立表示・素材を活かす） */}
     <div class="hero__panel">
-      <p class="hero__sub">
-        <span class="mark">成田町で高校受験に向き合うご家庭へ。</span><br />
-        お子様を合格させたい想いに、専門講師<span class="num">3</span>名を中心とした<span class="num">9</span>名体制で本気で応えます。
-      </p>
+      <div class="hero__story">
+        <h2 class="hero__story-title">学生時代の思い出の場所</h2>
+        <div class="hero__story-copy">
+          <p>
+            真剣に学び、思いきり笑える。<br />
+            そんなアットホームな環境の中で<br />
+            お子様一人ひとりの学力を引き上げます。
+          </p>
+          <p>いつか子どもたちが振り返ったとき</p>
+          <div class="hero__story-quotes">
+            <p>「あの時、よく勉強がんばったな」</p>
+            <p>「ここで過ごせてよかったな」</p>
+          </div>
+          <p>そう思ってもらえる塾でありたい。</p>
+          <p>
+            義塾はそんな「思い出の場所」を目指して<br />
+            今日も子どもたちと向き合っています。
+          </p>
+        </div>
+      </div>
       <div class="hero__teachers" aria-label="9人の講師陣のシルエット">
-        <img src={`${base}images/teachers-silhouette-9.png`} alt="" loading="eager" />
+        <img src={`${base}images/optimized/teachers-silhouette-9.webp`} alt="" width="1600" height="500" loading="eager" decoding="async" />
       </div>
     </div>
 
-    {/* 3サービスナビ：横幅いっぱい・gap無し */}
-    <div class="hero__nav" id="services">
+    {/* クイックナビ：横幅いっぱい・gap無し */}
+    <div class="hero__nav" id="service-nav">
       {services.map((s) => <ServiceCard {...s} />)}
     </div>
 
@@ -271,7 +284,7 @@ const faqs = [
 
       {/* ① Before：悩みリスト＋左にシルエット（リストに追従） */}
       <div class="empathy__pair empathy__pair--problems">
-        <img class="empathy__silhouette empathy__silhouette--problems" src={`${base}images/empathy-silhouette-question.png`} alt="" aria-hidden="true" />
+        <img class="empathy__silhouette empathy__silhouette--problems" src={`${base}images/optimized/empathy-silhouette-question.webp`} alt="" width="640" height="800" loading="lazy" decoding="async" aria-hidden="true" />
         <ul class="empathy__list empathy__list--problems">
           {empathyItems.map((item) => (
             <li>
@@ -302,7 +315,7 @@ const faqs = [
             </li>
           ))}
         </ul>
-        <img class="empathy__silhouette empathy__silhouette--solve" src={`${base}images/empathy-silhouette-solved.png`} alt="" aria-hidden="true" />
+        <img class="empathy__silhouette empathy__silhouette--solve" src={`${base}images/optimized/empathy-silhouette-solved.webp`} alt="" width="640" height="800" loading="lazy" decoding="async" aria-hidden="true" />
       </div>
     </div>
 
@@ -317,11 +330,12 @@ const faqs = [
     <div class="trust__rail trust__rail--inempathy">
       <div class="trust__row">
         <p class="trust__row-label">中学受験 合格校</p>
-        <ul class="trust__cards" aria-label="中学受験 合格校一覧">
+        <p class="scroll-hint">横にスクロールして合格校を見る</p>
+        <ul class="trust__cards" aria-label="中学受験 合格校一覧" tabindex="0">
           {passSchools.filter((s) => s.group === "中学受験").map((s) => (
             <li
               class={`trust__card ${s.img ? "" : "trust__card--placeholder"}`}
-              style={s.img ? `background-image: url(${base}images/schools/${s.img});` : ""}
+              style={s.img ? `background-image: url(${base}images/optimized/schools/${s.img});` : ""}
             >
               <span class="trust__card-overlay" aria-hidden="true"></span>
               <div class="trust__card-content">
@@ -334,11 +348,12 @@ const faqs = [
       </div>
       <div class="trust__row">
         <p class="trust__row-label">高校受験 合格校</p>
-        <ul class="trust__cards" aria-label="高校受験 合格校一覧">
+        <p class="scroll-hint">横にスクロールして合格校を見る</p>
+        <ul class="trust__cards" aria-label="高校受験 合格校一覧" tabindex="0">
           {passSchools.filter((s) => s.group === "高校受験").map((s) => (
             <li
               class={`trust__card ${s.img ? "" : "trust__card--placeholder"}`}
-              style={s.img ? `background-image: url(${base}images/schools/${s.img});` : ""}
+              style={s.img ? `background-image: url(${base}images/optimized/schools/${s.img});` : ""}
             >
               <span class="trust__card-overlay" aria-hidden="true"></span>
               <div class="trust__card-content">
@@ -355,25 +370,25 @@ const faqs = [
   {/* CTA ② 共感末尾 */}
   <CtaButton text="塾長に無料相談する" href={LINE_URL} id="cta-2" />
 
-  {/* ============ §3 3つの学び方（脱カード・レイヤー構成） ============ */}
+  {/* ============ §3 2つの学び方（脱カード・レイヤー構成） ============ */}
   <section class="section section--white learn section-anchor" id="services">
     <div class="container">
       <SectionHeader
-        title="義塾3つの学び方"
-        lead="義塾は、リアル校舎・オンライン・家庭教師の<span class='num'>3</span>サービスを併走しています。<span class='mark'>お子様一人ひとりの状況に合わせて、最適な学び方をご提案できる</span>。それが義塾の強みです。"
+        title="義塾2つの学び方"
+        lead="義塾は、校舎・家庭教師の<span class='num'>2</span>つの学び方を用意しています。<span class='mark'>お子様一人ひとりの状況に合わせて、最適な学び方をご提案できる</span>。"
       />
 
     </div>
 
     <article class="service service--real section-anchor" id="service-real" style="--accent:#4C1D95;--accent-deep:#2D1167;">
       <div class="service__hero">
-        <img class="service__hero-photo" src={`${base}images/hero-real.jpg`} alt="義塾の校舎・個別指導教室" loading="lazy" />
+        <img class="service__hero-photo" src={`${base}images/optimized/hero-real.webp`} alt="義塾の校舎・個別指導教室" width="1200" height="1600" loading="lazy" decoding="async" />
         <div class="service__hero-tint" aria-hidden="true"></div>
         <div class="service__hero-content">
           <div class="container">
             <div class="service__hero-top">
               <span class="service__num" aria-hidden="true">01</span>
-              <h3 class="service__name">義塾のリアル校舎</h3>
+              <h3 class="service__name">義塾</h3>
             </div>
             <div class="service__hero-bottom">
               <p class="service__eyebrow">通塾型｜個別＋クラス</p>
@@ -403,7 +418,7 @@ const faqs = [
             <ul class="service__meta">
               <li><span>対象</span><b>小3〜高3</b></li>
               <li><span>指導形態</span><b>個別／クラス</b></li>
-              <li><span>月額目安</span><b>14,300〜44,000円</b></li>
+              <li><span>月額目安</span><b>11,000円～35,200円</b></li>
             </ul>
 
             <div class="service__forwhom">
@@ -428,7 +443,7 @@ const faqs = [
               <h4>担当講師（9名体制）</h4>
               <ul>
                 <li>塾長：小川 大輔（指導歴14年・複数校舎の立ち上げ経験）</li>
-                <li>國府 泰：大手予備校20年超の英語ベテラン（TOEIC990点23回連続・英検1級）</li>
+                <li>プレゼン講座担当講師</li>
                 <li>大学受験専任講師</li>
                 <li>学校の教員免許を持つ講師</li>
                 <li>元気あふれる若手講師 ほか</li>
@@ -439,23 +454,24 @@ const faqs = [
               <h4 class="service__memories-title">義塾を、<br />学生時代の思い出の場所に。</h4>
               <p class="service__memories-lead">勉強の点数を上げるだけが、塾の役割ではないと考えています。お子様が大人になったとき、「あの教室で、先生や仲間と一緒に頑張った」と<strong>ふと思い出せる場所</strong>であってほしい——塾長の小川と9人の講師陣が、そんな想いで毎日この校舎の灯りをともしています。</p>
 
-              <div class="service__memories-scroll" role="region" aria-label="校舎の写真（横スクロール）">
+              <p class="scroll-hint">横にスクロールして校舎写真を見る</p>
+              <div class="service__memories-scroll" role="region" aria-label="校舎の写真（横スクロール）" tabindex="0">
                 <figure class="service__memory-photo">
-                  <img src={`${base}images/building-sign.jpg`} alt="義塾のエントランスサイン" loading="lazy" />
+                  <img src={`${base}images/optimized/building-sign.webp`} alt="義塾のエントランスサイン" width="960" height="1280" loading="lazy" decoding="async" />
                   <figcaption>
                     <span class="service__memory-photo-no">01</span>
                     <span class="service__memory-photo-label">エントランス</span>
                   </figcaption>
                 </figure>
                 <figure class="service__memory-photo">
-                  <img src={`${base}images/room-individual.jpg`} alt="第1教室／クラス授業用の教室" loading="lazy" />
+                  <img src={`${base}images/optimized/room-individual.webp`} alt="第1教室／クラス授業用の教室" width="960" height="1280" loading="lazy" decoding="async" />
                   <figcaption>
                     <span class="service__memory-photo-no">02</span>
                     <span class="service__memory-photo-label">第1教室／クラス授業</span>
                   </figcaption>
                 </figure>
                 <figure class="service__memory-photo">
-                  <img src={`${base}images/room-class.jpg`} alt="第2教室／個別指導の教室" loading="lazy" />
+                  <img src={`${base}images/optimized/room-class.webp`} alt="第2教室／個別指導の教室" width="960" height="1280" loading="lazy" decoding="async" />
                   <figcaption>
                     <span class="service__memory-photo-no">03</span>
                     <span class="service__memory-photo-label">第2教室／個別指導</span>
@@ -475,122 +491,14 @@ const faqs = [
       </div>
     </article>
 
-    <article class="service service--online section-anchor" id="service-online" style="--accent:#2E8B57;--accent-deep:#1F6240;">
+    <article class="service service--tutor section-anchor" id="service-tutor" style="--accent:#2563B8;--accent-deep:#174A87;">
       <div class="service__hero">
-        <img class="service__hero-photo" src={`${base}images/hero-online.jpg`} alt="自宅でオンライン1対1授業を受ける生徒" loading="lazy" />
+        <img class="service__hero-photo" src={`${base}images/optimized/hero-tutor.webp`} alt="自宅リビングで家庭教師から指導を受ける生徒" width="1400" height="788" loading="lazy" decoding="async" />
         <div class="service__hero-tint" aria-hidden="true"></div>
         <div class="service__hero-content">
           <div class="container">
             <div class="service__hero-top">
               <span class="service__num" aria-hidden="true">02</span>
-              <h3 class="service__name">義塾オンライン</h3>
-            </div>
-            <div class="service__hero-bottom">
-              <p class="service__eyebrow">在宅型｜完全マンツーマン</p>
-              <p class="service__catch">完全マンツーマンで<span class="num">4</span>コマ完結。<br />受験英語からプレゼン・AI音楽まで。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="service__body">
-        <div class="container">
-          <div class="service__story">
-            <p>「通塾の時間がもったいない」「もっと専門的に学ばせたい」——そんなご家庭にこそ、オンラインを選んでいただきたい。</p>
-            <p>義塾オンラインは、Zoomで講師と <span class="mark">完全1対1</span>。1コマ45分、全4コマで「1つの力」を確実に身につける、<span class="mark">完結型</span>の設計です。続けるか迷う前に、まず一つ完成させる。それが、お子様の自信に変わります。</p>
-          </div>
-
-          <details class="service__details">
-            <summary>
-              <span>続きを読む</span>
-              <span class="more-arrow" aria-hidden="true">▾</span>
-            </summary>
-
-            <div class="service__story service__story--continued">
-              <p>選べる講座は、英検・TOEIC、探究プレゼン、実践プレゼン、AI音楽制作の4つ。<span class="mark">TOEIC990点を23回連続満点・英検1級</span>保持の英語講師、<span class="mark">プレゼン講座を150本以上実施</span>してきた塾長が、それぞれ直接担当します。</p>
-            </div>
-
-            <ul class="service__meta">
-              <li><span>対象</span><b>小4〜社会人</b></li>
-              <li><span>指導形態</span><b>完全1対1（Zoom）<small>1コマ45分／全4コマ完結</small></b></li>
-              <li><span>月額目安</span><b>22,000円<small>教材費込み</small></b></li>
-            </ul>
-
-            <div class="service__forwhom">
-              <p class="service__forwhom-title">こんな方におすすめ</p>
-              <ul>
-                <li>受験英語を確実に伸ばしたい</li>
-                <li>話す力・伝える力を本気で鍛えたい</li>
-                <li>AIで何か作ってみたい</li>
-              </ul>
-            </div>
-
-            <div class="service__details-section">
-              <h4>選べる4つの講座</h4>
-
-              <div class="service__course">
-                <h5>講座<span class="num">1</span>｜探究プレゼン講座</h5>
-                <p>「自分は何者か」を見つけ、自分の言葉で伝えられるようになる3日間。小学4年生〜高校3年生が対象。受験勉強だけでは育たない「自分の興味を掘り下げて人前で語る力」を、4コマで完成させます。</p>
-                <dl>
-                  <div><dt>構成</dt><dd>3日間（初日45分／二日目90分／三日目45分）</dd></div>
-                  <div><dt>特徴</dt><dd>12タイププレゼン診断で自分に合った伝え方を見つける</dd></div>
-                  <div><dt>教材</dt><dd>書き込み式テキスト『プレゼンの書』をご自宅へ郵送</dd></div>
-                  <div><dt>担当</dt><dd>小川 大輔（塾長／プレゼン大会多数主催・探究講座150本実施・私立高校登壇）</dd></div>
-                  <div><dt>得られるもの</dt><dd>自分の興味を言語化する力／構成して話す力／人前で発表する経験</dd></div>
-                </dl>
-              </div>
-
-              <div class="service__course">
-                <h5>講座<span class="num">2</span>｜実践プレゼン講座</h5>
-                <p>提案・営業・授業——伝えるすべての場面で結果を出すための4コマ。大学生・社会人・指導者が対象。NORDT思考（Needs/Original/Real/Design/Talk）とデザイン10という2つの型で、プレゼンを「センス」から「再現可能なスキル」に変えます。</p>
-                <dl>
-                  <div><dt>構成</dt><dd>パターン1＝90分→45分→45分／パターン2＝90分→90分</dd></div>
-                  <div><dt>教材</dt><dd>『NORDT思考』＋『デザイン10』（データで配布）</dd></div>
-                  <div><dt>担当</dt><dd>小川 大輔（塾講師14年・プレゼン大会主催／審査員）</dd></div>
-                  <div><dt>得られるもの</dt><dd>相手のニーズを起点に組み立てる思考法／10枚スライドで伝える型／聞き手を動かす話し方</dd></div>
-                </dl>
-              </div>
-
-              <div class="service__course">
-                <h5>講座<span class="num">3</span>｜AI音楽制作講座</h5>
-                <p>楽器も楽譜もいらない。プロンプトだけで自分のオリジナル曲が完成する2日間。小学4年生〜社会人が対象。生成AI（Suno等）とオリジナルのプロンプトガイドを使って、世界に1つの音楽を作ります。</p>
-                <p class="service__sample-link"><a href="https://youtu.be/1YTl19RVlDU" target="_blank" rel="noopener">生徒が作ったサンプル曲を聴く</a></p>
-                <dl>
-                  <div><dt>構成</dt><dd>2日間×90分（全4コマ相当）</dd></div>
-                  <div><dt>教材</dt><dd>音楽生成AI＋オリジナルプロンプトガイド／生成は3回まで</dd></div>
-                  <div><dt>特典</dt><dd>完成した音楽データを無料プレゼント</dd></div>
-                  <div><dt>担当</dt><dd>義塾講師</dd></div>
-                  <div><dt>得られるもの</dt><dd>AIに意図を伝えるプロンプト設計力／自分の感情を音楽で表現する体験／オリジナル楽曲データ</dd></div>
-                </dl>
-              </div>
-
-              <div class="service__course">
-                <h5>講座<span class="num">4</span>｜英検・TOEIC対策講座</h5>
-                <p>TOEIC990点を23回連続。英検1級一発合格。その分析力を、4コマであなたに。中学1年生〜社会人が対象。大手予備校20年・指導2,000人以上の國府講師が、目標スコアまでの最短ルートを設計します。</p>
-                <dl>
-                  <div><dt>構成</dt><dd>全4コマ（時間配分はレベルに応じて自由設計）</dd></div>
-                  <div><dt>教材</dt><dd>『英語学習の俯瞰図』をご自宅へ郵送</dd></div>
-                  <div><dt>担当</dt><dd>國府 泰（TOEIC990点23回連続・英検1級一発合格・大手予備校20年指導・2,000人以上を合格に導き、現在も大学入試英語教材の執筆や入試問題作成に携わる英語スペシャリスト）</dd></div>
-                  <div><dt>得られるもの</dt><dd>今の英語力の正確な現在地／目標スコアまでの最短学習計画／論理で英文を読み解く思考法</dd></div>
-                </dl>
-              </div>
-            </div>
-
-            <CtaButton text="公式LINEで無料相談する" href={LINE_URL} id="cta-service-online" />
-          </details>
-        </div>
-      </div>
-    </article>
-
-    <article class="service service--tutor section-anchor" id="service-tutor" style="--accent:#2563B8;--accent-deep:#174A87;">
-      <div class="service__hero">
-        <img class="service__hero-photo" src={`${base}images/hero-tutor.jpg`} alt="自宅リビングで家庭教師から指導を受ける生徒" loading="lazy" />
-        <div class="service__hero-tint" aria-hidden="true"></div>
-        <span class="service__new-badge" aria-label="新サービス">New!</span>
-        <div class="service__hero-content">
-          <div class="container">
-            <div class="service__hero-top">
-              <span class="service__num" aria-hidden="true">03</span>
               <h3 class="service__name">義塾の家庭教師</h3>
             </div>
             <div class="service__hero-bottom">
@@ -681,7 +589,93 @@ const faqs = [
     </div>
   </section>
 
-  {/* CTA ③ 3サービス比較末尾 */}
+  {/* ============ オプション講座（2つの学び方とは別枠） ============ */}
+  <section class="section section--pale-gray presentation-option section-anchor" id="presentation">
+    <div class="container">
+      <SectionHeader
+        title="オプション講座"
+        lead="通常の学び方に加えて、必要な方だけ受講できる追加講座です。"
+      />
+    </div>
+
+    <article class="service service--presentation section-anchor" id="service-presentation" style="--accent:#1F6B45;--accent-deep:#174D33;">
+      <div class="service__hero">
+        <img class="service__hero-photo" src={`${base}images/optimized/hero-online.webp`} alt="オンラインでプレゼン講座を受ける生徒" width="1400" height="788" loading="lazy" decoding="async" />
+        <div class="service__hero-tint" aria-hidden="true"></div>
+        <div class="service__hero-content">
+          <div class="container">
+            <div class="service__hero-top">
+              <span class="service__num" aria-hidden="true">＋</span>
+              <h3 class="service__name">プレゼン講座</h3>
+            </div>
+            <div class="service__hero-bottom">
+              <p class="service__eyebrow">オプション講座｜オンライン1対1</p>
+              <p class="service__catch">自分の言葉で、<br />伝える力を育てる。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service__body">
+        <div class="container">
+          <div class="service__story">
+            <p>プレゼンテーションは、これからの時代に必要な力です。義塾では、探究プレゼンバトルの主催者である小川大輔が、オンラインでマンツーマンの個別指導を行います。</p>
+            <p>大会の審査基準（5つの視点）をお伝えし、<span class="mark">自分の言葉で伝える力</span>を育てます。お試し講座と通常授業の2種類から、お子様に合った形で始められます。</p>
+          </div>
+
+          <details class="service__details">
+            <summary>
+              <span>続きを読む</span>
+              <span class="more-arrow" aria-hidden="true">▾</span>
+            </summary>
+
+            <div class="service__story service__story--continued">
+              <p>お申し込みは公式LINEから。対象は小3〜高3です。</p>
+            </div>
+
+            <ul class="service__meta">
+              <li><span>対象</span><b>小3〜高3</b></li>
+              <li><span>指導形態</span><b>オンライン1対1</b></li>
+              <li><span>講座</span><b>お試し／通常</b></li>
+            </ul>
+
+            <div class="service__forwhom">
+              <p class="service__forwhom-title">こんな方におすすめ</p>
+              <ul>
+                <li>自分の考えを人前で伝えられるようになりたい</li>
+                <li>プレゼンテーションの型を学びたい</li>
+                <li>まずはお試し講座から始めたい</li>
+              </ul>
+            </div>
+
+            <div class="service__details-section">
+              <h4>プレゼン講座の2種類</h4>
+
+              <div class="service__course">
+                <h5>① プレゼン講座（お試しの80分講座）</h5>
+                <p>探究プレゼンバトルの主催者である小川大輔が、オンラインでマンツーマンの個別指導を行います。本大会の審査基準（5つの視点）をお伝えし、後半にはサンプル動画を見てプレゼンの模擬審査を行っていただきます。審査員が見ているポイントが分かれば、お子様のプレゼン力は一気に上達します。ぜひ受講してみてください。</p>
+                <dl>
+                  <div><dt>価格</dt><dd>5,500円（税込）</dd></div>
+                </dl>
+              </div>
+
+              <div class="service__course">
+                <h5>② プレゼン講座（週1回45分の通常授業）</h5>
+                <p>探究プレゼンバトルの主催者である小川大輔が、オンラインでマンツーマンの個別指導を行います。受講日時はご相談により決定します。本大会の審査基準（5つの視点）を順に説明し、一つのテーマに基づきお子様のプレゼンを一緒に作り上げます。出来上がったプレゼンは、保護者の方に向けてオンラインで発表します。終了後はまた別のテーマで同じサイクルを回し、お子様のプレゼン力を鍛え上げます。</p>
+                <dl>
+                  <div><dt>価格</dt><dd>月額19,800円（税込）・月4回、1回45分</dd></div>
+                </dl>
+              </div>
+            </div>
+
+            <CtaButton text="公式LINEで無料相談する" href={LINE_URL} id="cta-service-presentation" />
+          </details>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  {/* CTA ③ オプション講座末尾 */}
   <CtaButton text="塾長に無料相談する" href={LINE_URL} id="cta-3" />
 
   {/* ============ §6 保護者の声（講師紹介の前へ移動・2026-06-03） ============ */}
@@ -704,21 +698,21 @@ const faqs = [
         <p class="teachers__intro-lead">義塾は、ただ勉強を教える場所ではありません。お子様一人ひとりの個性と目標に向き合い、<span class="mark">「行きたい学校に行ける」</span>「学ぶことが好きになる」未来を、ベテランから若手まで多様な経歴を持つ<span class="num">9</span>名の講師陣と一緒に、本気で支える場所です。</p>
 
         <div class="teachers__intro-silhouette" aria-label="9人の講師陣のシルエット">
-          <img src={`${base}images/teachers-silhouette-9.png`} alt="" loading="lazy" />
+          <img src={`${base}images/optimized/teachers-silhouette-9.webp`} alt="" width="1600" height="500" loading="lazy" decoding="async" />
         </div>
 
-        <p class="teachers__intro-note">ここでは、義塾を率いる<strong class="text-orange">塾長</strong>と、オンライン講座を担当する<strong class="text-orange">英語スペシャリスト</strong>の<span class="num">2</span>名をご紹介します。</p>
+        <p class="teachers__intro-note">ここでは、義塾を率いる<strong class="text-orange">塾長</strong>をご紹介します。</p>
       </div>
     </div>
 
     <article class="teacher-feat">
-      <div class="teacher-feat__hero" style={`background-image:url(${base}images/teacher-bg-ogawa.jpg);`}>
+      <div class="teacher-feat__hero" style={`background-image:url(${base}images/optimized/teacher-bg-ogawa.webp);`}>
         <div class="teacher-feat__tint" aria-hidden="true"></div>
         <div class="teacher-feat__hero-content">
           <div class="container">
             <header class="teacher-feat__head">
               <div class="teacher-feat__icon">
-                <img src={`${base}images/teacher-ogawa.png`} alt="小川 大輔 塾長" loading="lazy" />
+                <img src={`${base}images/optimized/teacher-ogawa.webp`} alt="小川 大輔 塾長" width="640" height="639" loading="lazy" decoding="async" />
               </div>
               <div class="teacher-feat__title-block">
                 <span class="teacher-feat__role">塾長／義塾代表</span>
@@ -762,54 +756,6 @@ const faqs = [
       </div>
     </article>
 
-    <article class="teacher-feat">
-      <div class="teacher-feat__hero" style={`background-image:url(${base}images/teacher-bg-kokufu.jpg);`}>
-        <div class="teacher-feat__tint" aria-hidden="true"></div>
-        <div class="teacher-feat__hero-content">
-          <div class="container">
-            <header class="teacher-feat__head">
-              <div class="teacher-feat__icon teacher-feat__icon--illustration">
-                <img src={`${base}images/teacher-kokufu.png`} alt="國府 泰 担当講師" loading="lazy" />
-              </div>
-              <div class="teacher-feat__title-block">
-                <span class="teacher-feat__role">義塾オンライン／英検・TOEIC対策講座 主任講師</span>
-                <h3 class="teacher-feat__name">國府 泰</h3>
-                <span class="teacher-feat__name-en">Kokufu Hiroshi</span>
-              </div>
-            </header>
-            <blockquote class="teacher-feat__quote">TOEIC<span class="num">23</span>回連続満点。英語の壁を、論理で確実に超えさせます。</blockquote>
-            <div class="teacher-feat__bio">
-              <p>大手予備校にて講師としての歩みを始め、高校・大学・医学部予備校で<span class="mark"><span class="num">20</span>年間指導</span>。現在も大学入試英語教材の執筆や入試問題作成に携わり続ける、受験英語の第一線を知るスペシャリストです。</p>
-              <p>TOEIC<span class="num">23</span>回連続満点・英検<span class="num">1</span>級保持の圧倒的な英語力を武器に、京大・阪大をはじめとする最難関大学へ数多くの門下生を輩出。義塾オンラインでは少人数制の英検・TOEIC対策講座を担当し、論理で英文を読み解く思考法を伝えています。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="teacher-feat__body">
-        <div class="container">
-          <div class="teacher-feat__section">
-            <h4 class="teacher-feat__h4">専門・取り組み</h4>
-            <ul class="teacher-feat__list">
-              <li><span>TOEIC 990点 23回連続取得</span><small>国内屈指の精緻な英語分析力</small></li>
-              <li><span>「English Booster」開発者</span><small>論理的再構築による独自メソッド</small></li>
-              <li><span>予備校20年・大学入試英語教材執筆</span><small>京大・阪大など最難関大へ多数輩出</small></li>
-              <li><span>英検1級・超精密指導</span><small>高度な英作文・読解指導に定評</small></li>
-            </ul>
-          </div>
-
-          <div class="teacher-feat__section">
-            <h4 class="teacher-feat__h4">登壇・指導実績</h4>
-            <!-- 要確認: 年月・掲載先・回数等をクライアントから取得 -->
-            <ul class="teacher-feat__list teacher-feat__list--simple">
-              <li>大手予備校 主任講師として20年指導</li>
-              <li>大学入試英語教材の執筆</li>
-              <li>入試問題作成</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </article>
   </section>
 
   {/* CTA ④ 講師紹介末尾 */}
@@ -821,68 +767,19 @@ const faqs = [
       <SectionHeader title="料金一覧" />
 
       <div class="pricing-list" style="--accent:#4C1D95;">
-        <h3 class="pricing-list__group-title">義塾（リアル校舎）</h3>
+        <h3 class="pricing-list__group-title">義塾</h3>
         <ul class="pricing-list__items">
           <li class="pricing-list__item">
-            <span class="pricing-list__badge">個別</span>
+            <span class="pricing-list__badge">月額</span>
             <div class="pricing-list__label">
-              <span class="pricing-list__plan">小3〜高3｜5科目対応</span>
-              <span class="pricing-list__meta">月水木金 17:00〜21:40 / 45分の選択制</span>
+              <span class="pricing-list__plan">小3〜高3｜個別・クラス授業</span>
+              <span class="pricing-list__meta">学年・指導形態・受講内容により異なります</span>
             </div>
-            <div class="pricing-list__price"><b>14,300〜25,300</b><small>円 / 月</small></div>
-          </li>
-          <li class="pricing-list__item">
-            <span class="pricing-list__badge">中1</span>
-            <div class="pricing-list__label">
-              <span class="pricing-list__plan">クラス授業｜数学・英語・国語</span>
-              <span class="pricing-list__meta">水：数学／金：英国・19:05〜20:45</span>
-            </div>
-            <div class="pricing-list__price"><b>19,800</b><small>円 / 月</small></div>
-          </li>
-          <li class="pricing-list__item">
-            <span class="pricing-list__badge">中3</span>
-            <div class="pricing-list__label">
-              <span class="pricing-list__plan">クラス授業｜5科目（受験対策）</span>
-              <span class="pricing-list__meta">木：数数社／金：英英理・19:05〜21:40</span>
-            </div>
-            <div class="pricing-list__price"><b>33,000</b><small>円 / 月</small></div>
-          </li>
-          <li class="pricing-list__item">
-            <span class="pricing-list__badge">高1</span>
-            <div class="pricing-list__label">
-              <span class="pricing-list__plan">クラス授業｜高校英語・高校数学</span>
-              <span class="pricing-list__meta">月曜のみ・19:05〜21:40</span>
-            </div>
-            <div class="pricing-list__price"><b>15,400</b><small>円 / 月</small></div>
-          </li>
-          <li class="pricing-list__item">
-            <span class="pricing-list__badge">高3</span>
-            <div class="pricing-list__label">
-              <span class="pricing-list__plan">クラス授業｜国公立・難関私大対策</span>
-              <span class="pricing-list__meta">月・水・木・19:05〜21:40</span>
-            </div>
-            <div class="pricing-list__price"><b>44,000</b><small>円 / 月</small></div>
+            <div class="pricing-list__price"><b>11,000～35,200</b><small>円 / 月</small></div>
           </li>
         </ul>
         <p class="pricing-list__note">
-          ※ 中2・高2クラス料金、入塾金・教材費・季節講習費は教室までお問い合わせください。
-        </p>
-      </div>
-
-      <div class="pricing-list" style="--accent:#2E8B57;">
-        <h3 class="pricing-list__group-title">義塾オンライン</h3>
-        <ul class="pricing-list__items">
-          <li class="pricing-list__item">
-            <span class="pricing-list__badge">1対1</span>
-            <div class="pricing-list__label">
-              <span class="pricing-list__plan">完全個別 プライベートレッスン</span>
-              <span class="pricing-list__meta">月4コマ完結・教材費込み・小4〜社会人</span>
-            </div>
-            <div class="pricing-list__price"><b>22,000</b><small>円 / 月</small></div>
-          </li>
-        </ul>
-        <p class="pricing-list__note">
-          ※ 選べる4つの講座：探究プレゼン／実践プレゼン／AI音楽制作／英検・TOEIC対策
+          ※ 詳細な料金、入塾金・教材費・季節講習費は教室までお問い合わせください。
         </p>
       </div>
 
@@ -912,9 +809,34 @@ const faqs = [
         </p>
       </div>
 
-      {/* キャンペーン帯（obi）：義塾の家庭教師の料金の下に配置 */}
+      <div class="pricing-list" style="--accent:#1F6B45;">
+        <h3 class="pricing-list__group-title">オプション講座｜プレゼン講座</h3>
+        <ul class="pricing-list__items">
+          <li class="pricing-list__item">
+            <span class="pricing-list__badge">お試し</span>
+            <div class="pricing-list__label">
+              <span class="pricing-list__plan">プレゼン講座（80分）</span>
+              <span class="pricing-list__meta">小3〜高3・オンライン1対1</span>
+            </div>
+            <div class="pricing-list__price"><b>5,500</b><small>円 / 1回</small></div>
+          </li>
+          <li class="pricing-list__item">
+            <span class="pricing-list__badge">通常</span>
+            <div class="pricing-list__label">
+              <span class="pricing-list__plan">プレゼン講座（週1回45分）</span>
+              <span class="pricing-list__meta">小3〜高3・月4回・オンライン1対1</span>
+            </div>
+            <div class="pricing-list__price"><b>19,800</b><small>円 / 月</small></div>
+          </li>
+        </ul>
+        <p class="pricing-list__note">
+          ※ お申し込みは公式LINEから。
+        </p>
+      </div>
+
+      {/* キャンペーン帯（obi）：料金一覧の末尾に配置 */}
       <div class="campaign-obi" aria-label="新規入塾生限定 初月授業料1ヶ月無料">
-        <img src={`${base}images/badge-ribbon.png`} alt="新規入塾生限定 初月授業料1ヶ月無料" loading="lazy" />
+        <img src={`${base}images/optimized/badge-ribbon.webp`} alt="新規入塾生限定 初月授業料1ヶ月無料" width="1440" height="614" loading="lazy" decoding="async" />
         <p class="campaign-obi__note">
           ※ 対象期間・対象サービス・適用条件の詳細は公式LINEにてご案内します。
         </p>
@@ -1145,15 +1067,66 @@ const faqs = [
     margin: 0 auto;
   }
 
-  .hero__sub {
-    font-size: 15px;
-    line-height: 2;
-    color: var(--charcoal-soft);
-    letter-spacing: 0.02em;
-    margin-bottom: 0;
+  .hero__story {
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
   }
 
-  /* FV内3サービスナビ：横幅いっぱい・斜め区切り位置をカード①③の内側に寄せる */
+  .hero__story-title {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto 28px;
+    padding-bottom: 12px;
+    font-family: var(--font-serif);
+    font-size: clamp(24px, 6.8vw, 34px);
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+    color: var(--purple);
+  }
+
+  .hero__story-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 48px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--orange);
+    transform: translateX(-50%);
+  }
+
+  .hero__story-copy {
+    color: var(--charcoal-soft);
+    font-size: 14px;
+    line-height: 2;
+    letter-spacing: 0.025em;
+  }
+
+  .hero__story-copy > * + * {
+    margin-top: 16px;
+  }
+
+  .hero__story-quotes {
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 12px 22px;
+    border-left: 3px solid var(--purple-line);
+    border-right: 3px solid var(--purple-line);
+    color: var(--purple);
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.9;
+  }
+
+  .hero__story-quotes p + p {
+    margin-top: 2px;
+  }
+
+  /* FV内クイックナビ：横幅いっぱい・3枚の斜め区切り */
   .hero__nav {
     display: flex;
     width: 100%;
@@ -1172,13 +1145,13 @@ const faqs = [
     margin-right: calc(-2 * var(--slant));
   }
 
-  /* カード②：両端を斜めに切る（変更なし） */
+  /* カード②：両端を斜めに切る */
   .hero__nav :global(.svc-card:nth-child(2)) {
     clip-path: polygon(var(--slant) 0, 100% 0, calc(100% - var(--slant)) 100%, 0 100%);
     margin-right: calc(-3 * var(--slant) / 2);
   }
 
-  /* カード③：左端の斜めを内側に slant/2 シフト（=可視幅を縮める） */
+  /* カード③：左端を斜めに切る最終カード */
   .hero__nav :global(.svc-card:nth-child(3)) {
     clip-path: polygon(calc(3 * var(--slant) / 2) 0, 100% 0, 100% 100%, calc(var(--slant) / 2) 100%);
   }
@@ -1227,7 +1200,8 @@ const faqs = [
     .hero__panel { padding: 48px 32px 40px; }
     .hero__catch { padding: 0 56px 30px; }
     .hero__logo { width: clamp(280px, 38vw, 440px); }
-    .hero__sub { font-size: 17px; }
+    .hero__story-copy { font-size: 16px; }
+    .hero__story-quotes { font-size: 18px; }
     .hero__medal { width: 180px; height: 180px; bottom: 38px; right: 40px; }
   }
 
@@ -1332,6 +1306,31 @@ const faqs = [
     scrollbar-color: var(--purple-line) transparent;
     -webkit-overflow-scrolling: touch;
   }
+  .trust__cards:focus-visible,
+  .service__memories-scroll:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 3px;
+  }
+
+  .scroll-hint {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .scroll-hint::before {
+    content: "↔";
+    font-size: 15px;
+  }
+  .service__memories .scroll-hint {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  @media (max-width: 768px) {
+    .scroll-hint { display: flex; }
+  }
   .trust__cards::-webkit-scrollbar { height: 6px; }
   .trust__cards::-webkit-scrollbar-thumb {
     background: var(--purple-line);
@@ -1382,7 +1381,7 @@ const faqs = [
     align-self: flex-start;
     background: rgba(255, 255, 255, 0.92);
     color: var(--purple-deep);
-    font-size: 10.5px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.12em;
     padding: 4px 10px;
@@ -1562,7 +1561,7 @@ const faqs = [
   }
 
   /* =========================================
-     §3 3つの学び方（脱カード・レイヤー構成）
+     §3 2つの学び方・オプション講座（共通サービススタイル）
      ========================================= */
   .learn .container { position: relative; }
 
@@ -1867,7 +1866,7 @@ const faqs = [
     justify-content: center;
   }
 
-  /* 4つの講座カード（オンライン詳細内） */
+  /* プレゼン講座カード（オプション講座詳細内） */
   .learn__course {
     padding: 20px 0;
     border-bottom: 1px solid var(--line);
@@ -2413,7 +2412,7 @@ const faqs = [
     font-size: 12px !important;
   }
 
-  /* 4つの講座カード（オンライン詳細内） */
+  /* プレゼン講座カード（オプション講座詳細内） */
   .service__course {
     padding: 22px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -2521,7 +2520,7 @@ const faqs = [
   }
 
   /* =========================================
-     §3 リアル校舎 details 内：「思い出の場所に」ブロック
+     §3 校舎 details 内：「思い出の場所に」ブロック
      （旧 §4 を統合・写真は横スクロール snap で縦長を回避）
      ========================================= */
   .service__memories {
@@ -2772,7 +2771,7 @@ const faqs = [
     object-fit: cover;
     display: block;
   }
-  /* 國府先生の線画イラストアイコンは余白を作って表示（cover でなく contain で） */
+  /* 講師イラストアイコンは余白を作って表示（cover でなく contain で） */
   .teacher-feat__icon--illustration img {
     object-fit: contain;
     padding: 4px;
@@ -3000,6 +2999,7 @@ const faqs = [
     letter-spacing: 0.04em;
     border-radius: 4px;
     text-align: center;
+    white-space: nowrap;
   }
   .pricing-list__label {
     display: flex;
@@ -3014,7 +3014,7 @@ const faqs = [
     letter-spacing: 0.02em;
   }
   .pricing-list__meta {
-    font-size: 11.5px;
+    font-size: 12px;
     color: var(--muted);
     line-height: 1.55;
     letter-spacing: 0.02em;
@@ -3033,9 +3033,10 @@ const faqs = [
     color: var(--accent);
     line-height: 1;
     letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
   }
   .pricing-list__price small {
-    font-size: 10.5px;
+    font-size: 12px;
     color: var(--muted);
     letter-spacing: 0.04em;
   }
@@ -3049,7 +3050,7 @@ const faqs = [
     .pricing-list { margin-top: 36px; }
     .pricing-list__group-title { font-size: 17px; }
     .pricing-list__item {
-      grid-template-columns: 44px 1fr;
+      grid-template-columns: 56px minmax(0, 1fr);
       grid-template-rows: auto auto;
       column-gap: 10px;
       row-gap: 6px;
@@ -3058,7 +3059,7 @@ const faqs = [
     .pricing-list__badge { height: 24px; padding: 0 8px; font-size: 11px; }
     .pricing-list__label { grid-column: 2; }
     .pricing-list__plan { font-size: 13.5px; }
-    .pricing-list__meta { font-size: 11px; }
+    .pricing-list__meta { font-size: 12px; }
     .pricing-list__price {
       grid-column: 1 / -1;
       align-items: flex-end;
@@ -3066,10 +3067,10 @@ const faqs = [
       gap: 6px;
     }
     .pricing-list__price b { font-size: 18px; }
-    .pricing-list__price small { font-size: 10.5px; padding-bottom: 1px; }
+    .pricing-list__price small { font-size: 12px; padding-bottom: 1px; }
   }
 
-  /* キャンペーン帯（obi）：義塾の家庭教師の料金の下に配置 */
+  /* キャンペーン帯（obi）：料金一覧の末尾に配置 */
   .campaign-obi {
     margin: 36px auto 0;
     max-width: 900px;
